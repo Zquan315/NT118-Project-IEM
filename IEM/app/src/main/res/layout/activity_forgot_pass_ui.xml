@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/forgotPass"
     android:background="@drawable/backround"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +19,10 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/forgotPassText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ĐĂNG NHẬP"
+        android:text="QUÊN MẬT KHẨU"
         android:layout_marginTop="330dp"
         android:textColor="@color/white"
         android:textSize="36dp"
@@ -30,60 +31,60 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/UserEditText"
+        android:id="@+id/emailEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="Username"
-        android:inputType="text"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:textColorHint="@color/hintColor"
         android:background="@drawable/edittext_border"
-        app:layout_constraintTop_toBottomOf="@id/loginText"
+        app:layout_constraintTop_toBottomOf="@id/forgotPassText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
-        android:id="@+id/passEditText"
+        android:id="@+id/otpEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="Password"
+        android:hint="OTP"
         android:textColor="@color/black"
-        android:inputType="textPassword"
+        android:inputType="number"
         android:maxLines="1"
         android:layout_marginTop="20dp"
         android:textColorHint="@color/hintColor"
         android:background="@drawable/edittext_border"
-        app:layout_constraintTop_toBottomOf="@id/UserEditText"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/forgotPasswordTextBtn"
+        android:id="@+id/getcodeTextBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
-        android:text="Quên mật khẩu?"
+        android:text="Nhận mã"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/otpEditText" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/confirmBtn"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/buttonColor"
-        android:text="Đăng nhập"
+        android:text="Xác nhận"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTextBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/getcodeTextBtn" />
 
 
 
