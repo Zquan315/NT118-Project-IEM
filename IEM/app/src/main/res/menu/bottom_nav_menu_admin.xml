@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Trang chủ" />
+    <item
+        android:id="@+id/manage"
+        android:enabled="true"
+        android:icon="@drawable/management_icon"
+        android:title="Quản lý"/>
+    <item
+        android:id="@+id/setting"
+        android:enabled="true"
+        android:icon="@drawable/setting_icon"
+        android:title="Cài đặt"/>
+
+</menu>

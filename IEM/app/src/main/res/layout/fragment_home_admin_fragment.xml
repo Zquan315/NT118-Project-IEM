@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.home_admin_fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:verticalScrollbarPosition="right"
+        android:text="Bao gồm các nút: dự án, phòng ban, nhân viên, tài nguyên, tài chính" />
+
+</FrameLayout>
