@@ -8,15 +8,30 @@
     android:layout_height="match_parent"
     tools:context=".mainScreen_emp_UI">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nhân viên"
-        android:layout_marginTop="330dp"
-        android:textColor="@color/black"
-        android:textSize="36dp"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/backround"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
+        app:itemIconSize="25dp"
+        app:itemIconTint="@color/nav_item_select"
+        app:itemTextColor="@color/nav_item_select"
+        app:labelVisibilityMode="selected"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:menu="@menu/bottom_nav_menu_emp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

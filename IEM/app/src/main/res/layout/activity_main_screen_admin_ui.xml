@@ -24,7 +24,7 @@
         android:layout_height="80dp"
         android:background="@drawable/backround"
         app:itemActiveIndicatorStyle="@android:color/transparent"
-        app:itemIconSize="20dp"
+        app:itemIconSize="25dp"
         app:itemIconTint="@color/nav_item_select"
         app:itemTextColor="@color/nav_item_select"
         app:labelVisibilityMode="selected"

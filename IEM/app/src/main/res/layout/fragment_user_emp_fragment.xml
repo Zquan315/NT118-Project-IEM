@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.user_emp_fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:verticalScrollbarPosition="right"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hiện thông tin của cá nhân, đổi mật khẩu, cập nhật thông tin, đăng xuất" />
+</FrameLayout>
