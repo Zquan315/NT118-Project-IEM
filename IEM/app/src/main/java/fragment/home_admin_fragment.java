@@ -2,12 +2,24 @@ package fragment;
 
 import android.os.Bundle;
 
+import androidx.activity.EdgeToEdge;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import Adapter.AlertAdapter;
 import ex.g1.iem.R;
 
 /**
@@ -18,6 +30,11 @@ import ex.g1.iem.R;
 public class home_admin_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+
+    private RecyclerView recyclerView;
+    private AlertAdapter alertAdapter;
+    private List<String> alertList;
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -55,12 +72,26 @@ public class home_admin_fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_admin_fragment, container, false);
+        View view =  inflater.inflate(R.layout.fragment_home_admin_fragment, container, false);
+
+        alertList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            alertList.add("Thông báo " + (i + 1));
+        }
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        alertAdapter = new AlertAdapter(alertList);
+        recyclerView.setAdapter(alertAdapter);
+        return view;
     }
+
+
 }

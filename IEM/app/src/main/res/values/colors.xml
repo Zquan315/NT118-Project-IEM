@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="hintColor">#A39D9D</color>
     <color name="buttonColor">#c07f36</color>
+    <color name="backroundLayout">#EFE6DD</color>
+    <color name="imageButton">#E3BD93</color>
 </resources>

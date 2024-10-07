@@ -5,13 +5,81 @@
     tools:context="fragment.setting_admin_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--Gồm: thông tin người quản lý, nút Reset: xóa hết tất cả dữ liệu,
+     nút bảo mật: đổi tên user và password,
+     nút đăng xuất: Đăng xuất-->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:verticalScrollbarPosition="right"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:text="Gồm: thông tin người quản lý, nút Reset: xóa hết tất cả dữ liệu,  nút bảo mật: đổi tên user và password,   nút đăng xuất: Đăng xuất" />
+        android:layout_height="match_parent">
 
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/backround"/>
+
+        <ImageView
+            android:id="@+id/ImageView"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo_mini"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-198dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chủ tài khoản: QUẢN TRỊ VIÊN"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="start"
+            />
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Reset"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/changeSecurityButton"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Thay đổi bảo mật"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/addEmployButton"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Tạo tài khoản nhân viên"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/LogOutButton"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Đăng xuất"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
 </FrameLayout>
