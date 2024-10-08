@@ -9,7 +9,7 @@
         android:id="@+id/manage"
         android:enabled="true"
         android:icon="@drawable/management_icon"
-        android:title="Quản lý"/>
+        android:title="Quản lý lương"/>
     <item
         android:id="@+id/setting"
         android:enabled="true"

@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-01T03:46:54.083718500Z">
+        <DropdownSelection timestamp="2024-10-07T14:48:29.592093500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=QO8PJ7Y5MBHQFY5T" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ACER\.android\avd\My_android.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -15,12 +15,7 @@
           <targets>
             <Target type="DEFAULT_BOOT">
               <handle>
-                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ACER\.android\avd\My-phone_API_29.avd" />
-              </handle>
-            </Target>
-            <Target type="DEFAULT_BOOT">
-              <handle>
-                <DeviceId pluginId="PhysicalDevice" identifier="serial=QO8PJ7Y5MBHQFY5T" />
+                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ACER\.android\avd\My_android.avd" />
               </handle>
             </Target>
           </targets>

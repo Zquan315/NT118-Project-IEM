@@ -1,14 +1,22 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Adapter.SalaryAdapter;
 import ex.g1.iem.R;
+import Class.SalaryManagement;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +26,9 @@ import ex.g1.iem.R;
 public class manage_admin_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+    public RecyclerView recyclerView;
+    public  List<SalaryManagement> employeeList;
+    public SalaryAdapter salaryAdapter;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -57,10 +68,27 @@ public class manage_admin_fragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_admin_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_manage_admin_fragment, container, false);
+
+
+        recyclerView = view.findViewById(R.id.recyclerView_mana);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        employeeList = new ArrayList<>();
+        employeeList.add(new SalaryManagement("Tô Công Quân", "20,000,000 VND", 0, "20,000,000 VND"));
+        employeeList.add(new SalaryManagement("Nguyễn Thành Thạo", "15,000,000 VND", 1, "14,750,000 VND"));
+        employeeList.add(new SalaryManagement("Lâm Hoàng Phước", "12,500,000 VND", 4, "11,500,000 VND"));
+        employeeList.add(new SalaryManagement("Huỳnh Ngọc Anh Kiệt", "12,500,000 VND", 2, "12,000,000 VND"));
+        employeeList.add(new SalaryManagement("Lê Hoàng Nam", "12,500,000 VND", 1, "12,250,000 VND"));
+
+        salaryAdapter = new SalaryAdapter(employeeList);
+        recyclerView.setAdapter(salaryAdapter);
+        return view;
     }
 }

@@ -5,13 +5,37 @@
     tools:context="fragment.manage_admin_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:verticalScrollbarPosition="right"
-        android:text="bao gồm 2 tab: lương cơ bản - lương tổng kết và nghỉ phép của nhân viên" />
+    <!--bao gồm 2 tab: lương cơ bản - lương tổng kết và nghỉ phép của nhân viên-->
 
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:title="Danh sách"
+            android:background="@drawable/backround"/>
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:queryHint="Tìm kiếm"
+            android:searchIcon="@drawable/search_ic"
+            android:background="@drawable/edittext_border"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_mana"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            tools:listitem="@layout/list_salary"
+            />
+
+    </LinearLayout>
 </FrameLayout>
