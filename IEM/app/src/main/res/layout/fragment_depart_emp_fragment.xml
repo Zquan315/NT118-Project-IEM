@@ -5,13 +5,73 @@
     tools:context="fragment.depart_emp_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:verticalScrollbarPosition="right"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="26dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hiện thông tin phòng ban, danh sách nhân viên trong phòng ban" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name_depart_emp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Tên phòng ban"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:background="@drawable/backround"/>
+
+        <LinearLayout
+            android:background="@color/imageButton"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Danh sách nhân viên"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="|"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng: "
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/num_of_employee_emp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_Depart_emp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/list_employee_depart_emp"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>

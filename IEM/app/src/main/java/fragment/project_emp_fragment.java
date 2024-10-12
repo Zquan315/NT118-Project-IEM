@@ -3,11 +3,19 @@ package fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Adapter.ProjectManageAdapter;
+import Class.ProjectManage;
+import Adapter.ProjectManageAdapter;
 import ex.g1.iem.R;
 
 /**
@@ -18,6 +26,10 @@ import ex.g1.iem.R;
 public class project_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+    public RecyclerView recyclerView;
+    public List<ProjectManage> projectManageList;
+    public ProjectManageAdapter ProjectManageAdapter;
+    
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -61,6 +73,22 @@ public class project_emp_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_project_emp_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_project_emp_fragment, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView_project_emp);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        projectManageList = new ArrayList<>();
+        for (int i = 1; i < 6; i++)
+        {
+            int a = i + 90;
+            projectManageList.add(new ProjectManage("00" + Integer.toString(i),
+                    "IEM" + Integer.toString(i*5), a));
+        }
+        ProjectManageAdapter = new ProjectManageAdapter(projectManageList);
+        recyclerView.setAdapter(ProjectManageAdapter);
+        
+        return view;   
     }
 }
