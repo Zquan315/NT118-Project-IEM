@@ -4,13 +4,266 @@
     android:layout_height="match_parent"
     tools:context="fragment.user_emp_fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:verticalScrollbarPosition="right"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="26sp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hiện thông tin của cá nhân, đổi mật khẩu, cập nhật thông tin, đăng xuất" />
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/backround"
+            android:layout_height="70dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Thông tin cá nhân"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:gravity="center" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/exit_ic"
+                android:backgroundTint="@android:color/transparent" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Tên nhân viên -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tên nhân viên"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/name_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="Tô Công Quân"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Mã nhân viên -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Mã nhân viên"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/id_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="22521190"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Key -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Key"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/key_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="IEM6541"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Phòng ban -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Phòng ban"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/depart_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="Nhân sự"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Số điện thoại -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Số điện thoại"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/phone_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:autoLink="phone"
+                    android:background="@drawable/edittext_border"
+                    android:text="0784310104"
+                    />
+            </LinearLayout>
+
+            <!-- Email -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/email_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoLink="email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="22521190@gm.uit.edu.vn"
+                    />
+            </LinearLayout>
+
+            <!-- Giới tính -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Giới tính"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/sex_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="Nam"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Chức vụ -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Chức vụ"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/role_info_emp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
+                    android:text="Trưởng phòng"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/buttonColor"
+                android:text="Lưu thông tin"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="16dp" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/buttonColor"
+                android:text="Thay đổi bảo mật"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="16dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>
