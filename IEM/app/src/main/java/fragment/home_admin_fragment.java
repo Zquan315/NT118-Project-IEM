@@ -1,25 +1,22 @@
 package fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import Adapter.AlertAdapter;
+import ex.g1.iem.ImageButton_Home_Admin.Depart_ImageButton;
 import ex.g1.iem.R;
 
 /**
@@ -73,7 +70,6 @@ public class home_admin_fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
     }
 
     @Override
@@ -82,6 +78,19 @@ public class home_admin_fragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home_admin_fragment, container, false);
 
+        //Xử lí sự kiện khi nhấn các ImageButton
+        ImageButton departImageButton = view.findViewById(R.id.departImageButton);
+        ImageButton employeeImageButton = view.findViewById(R.id.employeeImageButton);
+        ImageButton planImageButton = view.findViewById(R.id.planImageButton);
+        ImageButton resImageButton = view.findViewById(R.id.resImageButton);
+        ImageButton financeImageButton = view.findViewById(R.id.financeImageButton);
+
+        departImageButton.setOnClickListener(v ->{
+            Intent intent = new Intent(getActivity(), Depart_ImageButton.class);
+            startActivity(intent);
+        });
+
+        // Hiển thị các thông báo
         alertList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             alertList.add("Thông báo " + (i + 1));
@@ -95,3 +104,4 @@ public class home_admin_fragment extends Fragment {
 
 
 }
+

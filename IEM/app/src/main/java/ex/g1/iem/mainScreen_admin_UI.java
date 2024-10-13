@@ -63,5 +63,7 @@ public class mainScreen_admin_UI extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+        BottomNavigationView bottomNavigation_bar = findViewById(R.id.bottom_navigation);
     }
+
 }
