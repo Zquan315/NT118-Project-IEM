@@ -38,7 +38,8 @@ public class Depart_ImageButton extends AppCompatActivity {
         DepartmentAdapter departmentAdapter = new DepartmentAdapter(departmentList);
         recyclerView.setAdapter(departmentAdapter);
 
-
+        // Xử lí sự kiện khi nhấn nút back
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.depart_imagebutton), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
