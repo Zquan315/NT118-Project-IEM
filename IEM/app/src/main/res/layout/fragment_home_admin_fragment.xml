@@ -210,6 +210,27 @@
                 android:scaleType="fitCenter" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/clear_all_Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xóa tất cả"
+                android:textColor="@color/blue"
+                android:textSize="18dp"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="0.5sp"
+                android:background="@color/black"/>
+        </LinearLayout>
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -217,6 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/white"
             tools:listitem="@layout/list_alert_demo"
             android:padding="10dp" />
 
