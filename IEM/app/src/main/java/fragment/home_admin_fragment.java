@@ -19,6 +19,7 @@ import Adapter.AlertAdapter;
 import ex.g1.iem.ImageButton_Home_Admin.Depart_ImageButton;
 import ex.g1.iem.ImageButton_Home_Admin.Employee_ImageButton;
 import ex.g1.iem.ImageButton_Home_Admin.Project_ImageButton;
+import ex.g1.iem.ImageButton_Home_Admin.Resource_ImageButton;
 import ex.g1.iem.R;
 
 /**
@@ -97,6 +98,10 @@ public class home_admin_fragment extends Fragment {
         });
         planImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Project_ImageButton.class);
+            startActivity(intent);
+        });
+        resImageButton.setOnClickListener(v ->{
+            Intent intent = new Intent(getActivity(), Resource_ImageButton.class);
             startActivity(intent);
         });
 

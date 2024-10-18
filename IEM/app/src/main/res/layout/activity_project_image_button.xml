@@ -45,6 +45,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_projectList"
             android:layout_weight="1"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:listitem="@layout/list_project_emp"
