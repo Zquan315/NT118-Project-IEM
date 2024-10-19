@@ -1,9 +1,11 @@
 package Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import Class.SalaryManagement;
+import ex.g1.iem.Deep_Event.Salary_Edit;
 import ex.g1.iem.R;
 
 
@@ -36,10 +39,21 @@ public class SalaryAdapter extends RecyclerView.Adapter<SalaryAdapter.SalaryView
     public void onBindViewHolder(@NonNull SalaryViewHolder holder, int position) {
         SalaryManagement employee = listSalary.get(position);
         holder.txtName.setText(employee.getName());
-        holder.txtBasicSalary.setText("Lương cơ bản: " + employee.getBasicSalary());
+        holder.txtBasicSalary.setText("Lương cơ bản: " + employee.getBasicSalary() + " VND");
         holder.txtLeaveDays.setText("Số ngày nghỉ: " + employee.getLeaveDays());
-        holder.txtTotalSalary.setText("Lương tổng kết: " + employee.getTotalSalary());
+        holder.txtTotalSalary.setText("Lương tổng kết: " + employee.getTotalSalary() + " VND");
         holder.imgEmployee.setImageResource(R.drawable.emp_ic);
+
+        //Xử lí sự kiện khi nhấn Tên nhân viên
+        holder.txtName.setOnClickListener(v -> {
+            // Gửi tất cả dữ liệu sang Salary_Edit khi nhấn vào Tên nhân viên
+            Intent intent = new Intent(v.getContext(), Salary_Edit.class);
+            intent.putExtra("employee_name", employee.getName());
+            intent.putExtra("employee_basicSalary", employee.getBasicSalary());
+            intent.putExtra("employee_leaveDays", Integer.toString(employee.getLeaveDays()));
+            v.getContext().startActivity(intent);
+        });
+
     }
 
     @Override
