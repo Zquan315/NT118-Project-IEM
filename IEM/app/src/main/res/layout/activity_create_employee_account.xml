@@ -1,43 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_employee_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragment.user_emp_fragment">
-
+    tools:context=".Deep_Event.Create_Employee_Account">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
+        <!-- TODO: Update with your layout -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:background="@drawable/backround"
-            android:layout_height="70dp">
-            <TextView
-                android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@drawable/backround">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:contentDescription="Back to home"
+                android:src="@drawable/back_ic"
+                android:scaleType="fitCenter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thông tin cá nhân"
+                android:text="Tạo tài khoản"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="24sp"
-                android:gravity="center" />
-
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/exit_ic"
-                android:backgroundTint="@android:color/transparent" />
+                />
         </LinearLayout>
 
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -62,10 +67,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="Tô Công Quân"
-                    android:enabled="false" />
+                    android:text="" />
             </LinearLayout>
 
             <!-- Mã nhân viên -->
@@ -86,10 +91,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="22521190"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:text="" />
             </LinearLayout>
 
             <!-- Key -->
@@ -111,9 +117,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
+                    android:enabled="false"
                     android:background="@drawable/edittext_border"
-                    android:text="IEM6541"
-                    android:enabled="false" />
+                    android:text="" />
             </LinearLayout>
 
             <!-- Phòng ban -->
@@ -129,15 +135,12 @@
                     android:text="Phòng ban"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
-                <EditText
+                <Spinner
                     android:id="@+id/depart_info_emp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:background="@drawable/edittext_border"
-                    android:text="Nhân sự"
-                    android:enabled="false" />
+                    android:background="@drawable/edittext_border" />
             </LinearLayout>
 
             <!-- Số điện thoại -->
@@ -163,7 +166,7 @@
                     android:textColor="@color/black"
                     android:autoLink="phone"
                     android:background="@drawable/edittext_border"
-                    android:text="0784310104"
+
                     />
             </LinearLayout>
 
@@ -190,7 +193,6 @@
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="22521190@gm.uit.edu.vn"
                     />
             </LinearLayout>
 
@@ -207,15 +209,12 @@
                     android:text="Giới tính"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
-                <EditText
+                <Spinner
                     android:id="@+id/sex_info_emp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:background="@drawable/edittext_border"
-                    android:text="Nam"
-                    android:enabled="false" />
+                    android:background="@drawable/edittext_border" />
             </LinearLayout>
 
             <!-- Chức vụ -->
@@ -231,35 +230,33 @@
                     android:text="Chức vụ"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
-                <EditText
+                <Spinner
                     android:id="@+id/role_info_emp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:background="@drawable/edittext_border"
-                    android:text="Trưởng phòng"
-                    android:enabled="false" />
+                    android:background="@drawable/edittext_border" />
             </LinearLayout>
 
             <!-- Buttons -->
             <Button
-                android:id="@+id/save_info_button"
+                android:id="@+id/random_id_key_button"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/buttonColor"
-                android:text="Lưu thông tin"
+                android:text="Tạo ID và Key"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:padding="16dp" />
+
             <Button
-                android:id="@+id/change_secure_button"
+                android:id="@+id/create_account_button"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/buttonColor"
-                android:text="Thay đổi bảo mật"
+                android:text="Tạo tài khoản"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -267,5 +264,6 @@
                 android:padding="16dp" />
 
         </LinearLayout>
+
     </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

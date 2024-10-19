@@ -3,4 +3,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome">Chào mừng bạn đến với ứng dụng Quản lý doanh nghiệp IT - IEM</string>
+
+    <string-array name="departments_array">
+        <item>None</item>
+        <item>Phát triển phần mềm</item>
+        <item>Hạ tầng IT</item>
+        <item>An ninh mạng</item>
+        <item>Quản lý dự án</item>
+        <item>Nhân sự</item>
+        <item>Hỗ trợ kỹ thuật</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>None</item>
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Khác</item>
+    </string-array>
+
+    <string-array name="role_array">
+        <item>None</item>
+        <item>Trưởng phòng</item>
+        <item>Nhân viên</item>
+    </string-array>
 </resources>

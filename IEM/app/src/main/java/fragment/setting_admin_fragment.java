@@ -1,5 +1,6 @@
 package fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import ex.g1.iem.Deep_Event.Create_Employee_Account;
 import ex.g1.iem.R;
 
 /**
@@ -61,6 +64,11 @@ public class setting_admin_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting_admin_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_setting_admin_fragment, container, false);
+        Button addEmployButton = view.findViewById(R.id.addEmployButton);
+        addEmployButton.setOnClickListener(v -> {
+            startActivity(new Intent(this.getActivity(), Create_Employee_Account.class));
+        });
+        return view;
     }
 }
