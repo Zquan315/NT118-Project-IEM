@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, mainScreen_emp_UI.class);
                 startActivity(intent);
             }
+            finish(); // kết thúc activity
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

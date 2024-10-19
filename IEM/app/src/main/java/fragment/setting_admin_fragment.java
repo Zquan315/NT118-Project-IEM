@@ -1,5 +1,8 @@
 package fragment;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Objects;
+
+import ex.g1.iem.Deep_Event.Change_Security_Admin;
 import ex.g1.iem.Deep_Event.Create_Employee_Account;
+import ex.g1.iem.MainActivity;
 import ex.g1.iem.R;
 
 /**
@@ -60,6 +67,7 @@ public class setting_admin_fragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +76,37 @@ public class setting_admin_fragment extends Fragment {
         Button addEmployButton = view.findViewById(R.id.addEmployButton);
         addEmployButton.setOnClickListener(v -> {
             startActivity(new Intent(this.getActivity(), Create_Employee_Account.class));
+        });
+
+        Button changeSecurityButton = view.findViewById(R.id.changeSecurityButton);
+        changeSecurityButton.setOnClickListener(v -> {
+            startActivity(new Intent(this.getActivity(), Change_Security_Admin.class));
+        });
+
+        Button logOutButton = view.findViewById(R.id.LogOutButton);
+        logOutButton.setOnClickListener(v -> {
+            //xử lý nút đăng xuất
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
+            dialog.setTitle("Đăng xuất");
+            dialog.setMessage("Bạn có chắc chắn muốn đăng xuất không?");
+
+            // Nút OK
+            dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    requireActivity().finish();
+                }
+            });
+            // Nút hủy
+            dialog.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alertDialog = dialog.create();
+            alertDialog.show();
         });
         return view;
     }

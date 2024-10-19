@@ -13,6 +13,9 @@
         android:theme="@style/Theme.IEM"
         tools:targetApi="31">
         <activity
+            android:name=".Deep_Event.Change_Security_Admin"
+            android:exported="false" />
+        <activity
             android:name=".Deep_Event.Create_Employee_Account"
             android:exported="false" />
         <activity

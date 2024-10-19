@@ -34,7 +34,7 @@
         android:id="@+id/passEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="New password"
+        android:hint="Mật khẩu mới"
         android:inputType="textPassword"
         android:maxLines="1"
         android:textColor="@color/black"
@@ -49,7 +49,7 @@
         android:id="@+id/confirmPassEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="Confirm password"
+        android:hint="Xác nhận mật khẩu"
         android:textColor="@color/black"
         android:inputType="number"
         android:maxLines="1"
@@ -74,6 +74,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPassEditText" />
 
-
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="Quay lại"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
