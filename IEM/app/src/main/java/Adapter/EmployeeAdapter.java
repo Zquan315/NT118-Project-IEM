@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import Class.Employee;
+import ex.g1.iem.Deep_Event.Info_Employee;
+import ex.g1.iem.Deep_Event.Salary_Edit;
 import ex.g1.iem.R;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> {
@@ -36,6 +39,15 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         holder.txtRole.setText("Chức vụ: " + employee.getRole());
         holder.txtID.setText("Mã nhân viên: " + employee.getId());
         holder.imgEmployee.setImageResource(R.drawable.emp_ic);
+
+        holder.txtName.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), Info_Employee.class);
+            intent.putExtra("name", employee.getName());
+            intent.putExtra("depart", employee.getDepart());
+            intent.putExtra("role", employee.getRole());
+            intent.putExtra("id", employee.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

@@ -84,7 +84,7 @@ public class project_emp_fragment extends Fragment {
         {
             int a = i + 90;
             projectManageList.add(new ProjectManage("00" + Integer.toString(i),
-                    "IEM" + Integer.toString(i*5), a));
+                    "IEM" + Integer.toString(i*5), "IT"));
         }
         ProjectManageAdapter = new ProjectManageAdapter(projectManageList);
         recyclerView.setAdapter(ProjectManageAdapter);

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/change_security_emp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backround"
+    tools:context=".Deep_Event.Change_Security_Emp">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logomini"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_mini"
+            android:scaleType="fitCenter"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/changePassText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ĐỔI MẬT KHẨU"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="36dp" />
+
+        <EditText
+            android:id="@+id/currentPassEditText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Mật khẩu hiện tại"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/hintColor"
+            android:background="@drawable/edittext_border" />
+        <EditText
+            android:id="@+id/passEditText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Mật khẩu mới"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/hintColor"
+            android:background="@drawable/edittext_border" />
+
+        <EditText
+            android:id="@+id/confirmPassEditText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Xác nhận mật khẩu"
+            android:textColor="@color/black"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/hintColor"
+            android:background="@drawable/edittext_border"
+            />
+
+        <EditText
+            android:id="@+id/keyEditText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Key"
+            android:textColor="@color/black"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/hintColor"
+            android:background="@drawable/edittext_border"
+            />
+
+        <Button
+            android:id="@+id/changeBtn"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Thay đổi"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Quay lại"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

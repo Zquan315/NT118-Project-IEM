@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import Class.ProjectManage;
+import ex.g1.iem.Deep_Event.Info_Project;
 import ex.g1.iem.R;
 
 public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdapter.ProjectManageViewHolder> {
@@ -33,8 +35,16 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
         ProjectManage ProjectManage = listProjectManage.get(position);
         holder.txtID.setText(ProjectManage.getID());
         holder.txtName.setText("Tên dự án: " + ProjectManage.getName());
-        holder.txtProgress.setText("Tiến độ: " + ProjectManage.getProgress() + "%");
+        holder.txtUnderTake.setText("Đảm nhận: " + ProjectManage.getUnderTake());
         holder.imgProjectManage.setImageResource(R.drawable.plan_ic);
+
+        holder.txtID.setOnClickListener(v-> {
+            Intent intent = new Intent(v.getContext(), Info_Project.class);
+            intent.putExtra("name", ProjectManage.getName());
+            intent.putExtra("id", ProjectManage.getID());
+            intent.putExtra("undertake", ProjectManage.getUnderTake());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -43,14 +53,14 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
     }
 
     public static class ProjectManageViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtID, txtProgress;
+        TextView txtName, txtID, txtUnderTake;
         ImageView imgProjectManage;
 
         public ProjectManageViewHolder(@NonNull View itemView) {
             super(itemView);
             txtID = itemView.findViewById(R.id.id_project);
             txtName = itemView.findViewById(R.id.name_project);
-            txtProgress = itemView.findViewById(R.id.progressTextView);
+            txtUnderTake = itemView.findViewById(R.id.undertakeTextView);
             imgProjectManage = itemView.findViewById(R.id.icon_project);
         }
     }

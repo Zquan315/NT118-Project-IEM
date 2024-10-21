@@ -3,12 +3,12 @@ package Class;
 public class ProjectManage {
     private final String id;
     private final String name;
-    private final int progress;
+    private final String uderTake;
 
-    public ProjectManage(String id, String name, int progress) {
+    public ProjectManage(String id, String name, String uderTake) {
         this.name = name;
         this.id = id;
-        this.progress = progress;
+        this.uderTake = uderTake;
     }
 
     public String getName() {
@@ -19,6 +19,6 @@ public class ProjectManage {
         return id;
     }
 
-    public int getProgress() {return progress;}
+    public String getUnderTake() {return uderTake;}
 
 }

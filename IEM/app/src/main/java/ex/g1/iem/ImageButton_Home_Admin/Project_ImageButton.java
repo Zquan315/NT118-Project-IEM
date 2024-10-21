@@ -33,7 +33,7 @@ public class Project_ImageButton extends AppCompatActivity {
         {
             int a = i + 80;
             projectManageList.add(new ProjectManage("00" + Integer.toString(i),
-                    "IEM" + Integer.toString(i*5), a));
+                    "IEM" + Integer.toString(i*5), "Nhân sự"));
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

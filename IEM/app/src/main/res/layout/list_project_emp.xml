@@ -44,11 +44,11 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/progressTextView"
+                android:id="@+id/undertakeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Tiến đô: "
+                android:text="Đảm nhận: "
                 android:textSize="14sp" />
 
 

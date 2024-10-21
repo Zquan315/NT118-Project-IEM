@@ -1,10 +1,13 @@
 package ex.g1.iem.Deep_Event;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -59,7 +62,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng chọn đầy đủ thông tin phòng ban, giới tính, và chức vụ!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String prefixID, id ="", key="", prefixKey = "IEM";
+            String prefixID = "", id ="", key="", prefixKey = "IEM";
             String getDepart = departmentSpinner.getSelectedItem().toString();
             if(getDepart.equals("Phát triển pần mềm"))
                 prefixID = "SD";
@@ -73,10 +76,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 prefixID = "HR";
             else if(getDepart.equals("Hỗ trợ kỹ thuật"))
                 prefixID = "TS";
-            else {
-                Toast.makeText(this, "Vui lòng chọn đầy đủ thông tin phòng ban, giới tính, và chức vụ!", Toast.LENGTH_SHORT).show();
-                return;
-            }
+
 
 
             Random randID = new Random();
@@ -89,6 +89,20 @@ public class Create_Employee_Account extends AppCompatActivity {
             EditText keyEditText = findViewById(R.id.key_info_emp);
             idEditText.setText(id);
             keyEditText.setText(key);
+        });
+
+        // Tạo tài khoản
+        Button createAccountButton = findViewById(R.id.create_account_button);
+                createAccountButton.setOnClickListener(v -> {
+            // TODO: Implement create account logic
+            Intent intent = new Intent(this, Create_Pass_For_Account.class);
+                    @SuppressLint("CutPasteId")
+                    EditText idInfoEmp = findViewById(R.id.id_info_emp);
+                    @SuppressLint("CutPasteId")
+                    EditText nameInfoEmp = findViewById(R.id.name_info_emp);
+                    intent.putExtra("id", idInfoEmp.getText().toString());
+                    intent.putExtra("name", nameInfoEmp.getText().toString());
+            startActivity(intent);
         });
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());

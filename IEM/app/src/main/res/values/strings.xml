@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome">Chào mừng bạn đến với ứng dụng Quản lý doanh nghiệp IT - IEM</string>
+    <string name="example_description">Xin chào, tôi là một sinh viên đang theo học chuyên ngành công nghệ thông tin. Tôi có niềm đam mê đặc biệt với lập trình và phát triển phần mềm, đặc biệt trong các lĩnh vực như phát triển ứng dụng di động và web. Ngoài việc học, tôi cũng thường xuyên tìm hiểu và thực hành về các công nghệ mới như Docker, Flutter, và quản trị mạng. Tôi thích tham gia các dự án nhóm để học hỏi và phát triển kỹ năng làm việc tập thể. Ngoài ra, tôi cũng quan tâm đến các hoạt động ngoại khóa như thể thao và âm nhạc, giúp cân bằng giữa công việc học tập và cuộc sống cá nhân. Tôi luôn nỗ lực để phát triển bản thân và hướng tới những mục tiêu cao hơn trong sự nghiệp</string>
 
     <string-array name="departments_array">
         <item>None</item>
