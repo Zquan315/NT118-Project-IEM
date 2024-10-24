@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_pass_for_account"
+    android:id="@+id/delete_account"
     android:background="@drawable/backround"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Deep_Event.Create_Pass_For_Account">
+    tools:context=".Deep_Event.Delete_Account">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,45 +26,19 @@
             android:id="@+id/changePassText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TẠO MẬT KHẨU"
+            android:text="XÓA TÀI KHOẢN"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="36dp" />
 
-        <EditText
-            android:id="@+id/id_Employee_EditText"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:inputType="text"
-            android:text="Mã nhân viên"
-            android:maxLines="1"
-            android:enabled="false"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/hintColor"
-            android:background="@drawable/edittext_border" />
 
         <EditText
-            android:id="@+id/name_Employee_EditText"
+            android:id="@+id/IDEditText"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:hint="Mã nhân viên"
             android:layout_gravity="center"
             android:inputType="text"
-            android:text="Tên nhân viên"
-            android:maxLines="1"
-            android:enabled="false"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/hintColor"
-            android:background="@drawable/edittext_border" />
-        <EditText
-            android:id="@+id/passEditText"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Mật khẩu mới"
-            android:layout_gravity="center"
-            android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
@@ -72,12 +46,12 @@
             android:background="@drawable/edittext_border" />
 
         <EditText
-            android:id="@+id/confirmPassEditText"
+            android:id="@+id/nameEditText"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:hint="Xác nhận mật khẩu"
+            android:hint="Tên nhân viên"
             android:textColor="@color/black"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLines="1"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
@@ -92,7 +66,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/buttonColor"
-            android:text="Xác nhận"
+            android:text="Xóa tài khoản"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="18dp" />
@@ -109,4 +83,5 @@
             android:textSize="18dp" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

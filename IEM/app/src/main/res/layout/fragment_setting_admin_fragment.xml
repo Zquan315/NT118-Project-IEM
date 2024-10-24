@@ -40,13 +40,13 @@
             android:layout_gravity="start"
             />
         <Button
-            android:id="@+id/resetButton"
+            android:id="@+id/deleteAccountButton"
             android:layout_width="300dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/buttonColor"
-            android:text="Reset"
+            android:text="Xóa tài khoản nhân viên"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 

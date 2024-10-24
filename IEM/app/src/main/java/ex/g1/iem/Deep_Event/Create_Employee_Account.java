@@ -93,16 +93,8 @@ public class Create_Employee_Account extends AppCompatActivity {
 
         // Tạo tài khoản
         Button createAccountButton = findViewById(R.id.create_account_button);
-                createAccountButton.setOnClickListener(v -> {
-            // TODO: Implement create account logic
-            Intent intent = new Intent(this, Create_Pass_For_Account.class);
-                    @SuppressLint("CutPasteId")
-                    EditText idInfoEmp = findViewById(R.id.id_info_emp);
-                    @SuppressLint("CutPasteId")
-                    EditText nameInfoEmp = findViewById(R.id.name_info_emp);
-                    intent.putExtra("id", idInfoEmp.getText().toString());
-                    intent.putExtra("name", nameInfoEmp.getText().toString());
-            startActivity(intent);
+        createAccountButton.setOnClickListener(v -> {
+            Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
         });
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());

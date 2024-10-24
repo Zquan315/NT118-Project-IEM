@@ -17,6 +17,7 @@ import java.util.Objects;
 
 import ex.g1.iem.Deep_Event.Change_Security_Admin;
 import ex.g1.iem.Deep_Event.Create_Employee_Account;
+import ex.g1.iem.Deep_Event.Delete_Account;
 import ex.g1.iem.MainActivity;
 import ex.g1.iem.R;
 
@@ -78,11 +79,20 @@ public class setting_admin_fragment extends Fragment {
             startActivity(new Intent(this.getActivity(), Create_Employee_Account.class));
         });
 
+        //xử lý nút xóa tài khoản
+        Button deleteAccountButton = view.findViewById(R.id.deleteAccountButton);
+        deleteAccountButton.setOnClickListener(v -> {
+            startActivity(new Intent(this.getActivity(), Delete_Account.class));
+        });
+
+
+        //xử lý nút thay đổi bảo mật
         Button changeSecurityButton = view.findViewById(R.id.changeSecurityButton);
         changeSecurityButton.setOnClickListener(v -> {
             startActivity(new Intent(this.getActivity(), Change_Security_Admin.class));
         });
 
+        //xử lý nút đăng xuất
         Button logOutButton = view.findViewById(R.id.LogOutButton);
         logOutButton.setOnClickListener(v -> {
             //xử lý nút đăng xuất
