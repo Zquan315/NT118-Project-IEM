@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import Class.Resource;
+import ex.g1.iem.Deep_Event.Resource_Info;
 import ex.g1.iem.R;
 
 public class HardWareAdapter extends RecyclerView.Adapter<HardWareAdapter.HardWareViewHolder> {
@@ -34,6 +36,14 @@ public class HardWareAdapter extends RecyclerView.Adapter<HardWareAdapter.HardWa
         holder.txtName.setText(HardWare.getName());
         holder.txtNum.setText(Integer.toString(HardWare.getNum()));
         holder.imgHardWare.setImageResource(R.drawable.hardware_ic);
+
+        holder.itemView.setOnClickListener(v-> {
+            Intent intent = new Intent(v.getContext(), Resource_Info.class);
+            intent.putExtra("name", HardWare.getName());
+            intent.putExtra("num", HardWare.getNum());
+            intent.putExtra("type", HardWare.getType());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

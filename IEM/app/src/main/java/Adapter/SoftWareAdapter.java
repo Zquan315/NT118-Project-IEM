@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import Class.Resource;
+import ex.g1.iem.Deep_Event.Resource_Info;
 import ex.g1.iem.R;
 
 public class SoftWareAdapter extends RecyclerView.Adapter<SoftWareAdapter.SoftWareViewHolder> {
@@ -34,6 +36,14 @@ public class SoftWareAdapter extends RecyclerView.Adapter<SoftWareAdapter.SoftWa
         holder.txtName.setText(SoftWare.getName());
         holder.txtNum.setText(Integer.toString(SoftWare.getNum()));
         holder.imgSoftWare.setImageResource(R.drawable.software_ic);
+
+        holder.itemView.setOnClickListener(v-> {
+            Intent intent = new Intent(v.getContext(), Resource_Info.class);
+            intent.putExtra("name", SoftWare.getName());
+            intent.putExtra("num", SoftWare.getNum());
+            intent.putExtra("type", SoftWare.getType());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

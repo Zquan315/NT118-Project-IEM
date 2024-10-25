@@ -40,7 +40,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         holder.txtID.setText("Mã nhân viên: " + employee.getId());
         holder.imgEmployee.setImageResource(R.drawable.emp_ic);
 
-        holder.txtName.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), Info_Employee.class);
             intent.putExtra("name", employee.getName());
             intent.putExtra("depart", employee.getDepart());

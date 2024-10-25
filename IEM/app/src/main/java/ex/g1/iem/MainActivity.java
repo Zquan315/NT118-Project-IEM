@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, mainScreen_emp_UI.class);
                 startActivity(intent);
             }
+            else{
+                user.setError("Sai tài khoản hoặc mật khẩu");
+                pass.setError("Sai tài khoản hoặc mật khẩu");
+                return;
+            }
             finish(); // kết thúc activity
         });
 

@@ -38,7 +38,7 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
         holder.txtUnderTake.setText("Đảm nhận: " + ProjectManage.getUnderTake());
         holder.imgProjectManage.setImageResource(R.drawable.plan_ic);
 
-        holder.txtID.setOnClickListener(v-> {
+        holder.itemView.setOnClickListener(v-> {
             Intent intent = new Intent(v.getContext(), Info_Project.class);
             intent.putExtra("name", ProjectManage.getName());
             intent.putExtra("id", ProjectManage.getID());

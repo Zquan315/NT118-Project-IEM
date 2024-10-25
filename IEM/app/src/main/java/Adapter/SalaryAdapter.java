@@ -44,9 +44,8 @@ public class SalaryAdapter extends RecyclerView.Adapter<SalaryAdapter.SalaryView
         holder.txtTotalSalary.setText("Lương tổng kết: " + employee.getTotalSalary() + " VND");
         holder.imgEmployee.setImageResource(R.drawable.emp_ic);
 
-        //Xử lí sự kiện khi nhấn Tên nhân viên
-        holder.txtName.setOnClickListener(v -> {
-            // Gửi tất cả dữ liệu sang Salary_Edit khi nhấn vào Tên nhân viên
+        holder.itemView.setOnClickListener(v -> {
+            // Gửi tất cả dữ liệu sang Salary_Edit
             Intent intent = new Intent(v.getContext(), Salary_Edit.class);
             intent.putExtra("employee_name", employee.getName());
             intent.putExtra("employee_basicSalary", employee.getBasicSalary());
