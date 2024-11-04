@@ -1,13 +1,11 @@
 package ex.g1.iem.Deep_Event;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,21 +14,38 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import Class.Employee;
 import java.util.Random;
 
 import ex.g1.iem.R;
 
 public class Create_Employee_Account extends AppCompatActivity {
-
-    @SuppressLint("MissingInflatedId")
+    FirebaseFirestore firestore;
+    DatabaseReference DBRealtime;
+    EditText nameEditText, idEditText, keyEditText, phoneEditText, emailEditText;
+    Spinner departmentSpinner, genderSpinner, roleSpinner;
+    Button createAccount;
+    @SuppressLint({"MissingInflatedId", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_employee_account);
+        FirebaseApp.initializeApp(this);
+        firestore = FirebaseFirestore.getInstance();
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
 
+        nameEditText = findViewById(R.id.name_info_emp);
+        idEditText = findViewById(R.id.id_info_emp);
+        keyEditText = findViewById(R.id.key_info_emp);
+        phoneEditText = findViewById(R.id.phone_info_emp);
+        emailEditText = findViewById(R.id.email_info_emp);
         // Spinner for Phòng ban
-        Spinner departmentSpinner = findViewById(R.id.depart_info_emp);
+        departmentSpinner = findViewById(R.id.depart_info_emp);
         ArrayAdapter<CharSequence> departmentAdapter = ArrayAdapter.createFromResource(this,
                 R.array.departments_array, R.layout.spinner_item);
         departmentAdapter.setDropDownViewResource( R.layout.spinner_dropdown_item);
@@ -38,7 +53,7 @@ public class Create_Employee_Account extends AppCompatActivity {
         departmentSpinner.setSelection(0);
 
         // Spinner for Giới tính
-        Spinner genderSpinner = findViewById(R.id.sex_info_emp);
+        genderSpinner = findViewById(R.id.sex_info_emp);
         ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, R.layout.spinner_item);
         genderAdapter.setDropDownViewResource( R.layout.spinner_dropdown_item);
@@ -46,7 +61,7 @@ public class Create_Employee_Account extends AppCompatActivity {
         genderSpinner.setSelection(0);
 
         //spinner chức vụ
-        Spinner roleSpinner = findViewById(R.id.role_info_emp);
+        roleSpinner = findViewById(R.id.role_info_emp);
         ArrayAdapter<CharSequence> roleAdapter = ArrayAdapter.createFromResource(this,
                 R.array.role_array,  R.layout.spinner_item);
         roleAdapter.setDropDownViewResource( R.layout.spinner_dropdown_item);
@@ -85,17 +100,59 @@ public class Create_Employee_Account extends AppCompatActivity {
             int randomKey = randKey.nextInt(90000) + 10000;
             id = prefixID + String.valueOf(randomNumber);
             key = prefixKey + String.valueOf(randomKey);
-            EditText idEditText = findViewById(R.id.id_info_emp);
-            EditText keyEditText = findViewById(R.id.key_info_emp);
             idEditText.setText(id);
             keyEditText.setText(key);
         });
 
-        // Tạo tài khoản
-        Button createAccountButton = findViewById(R.id.create_account_button);
-        createAccountButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+
+        // Tạo tài khoản va lưu thông tin lên database
+        createAccount = findViewById(R.id.create_account_button);
+        createAccount.setOnClickListener(v -> {
+            if(nameEditText.getText().toString().isEmpty() || idEditText.getText().toString().isEmpty()
+            || keyEditText.getText().toString().isEmpty() || departmentSpinner.getSelectedItem().toString().equals("None")
+            || genderSpinner.getSelectedItem().toString().equals("None")
+            || roleSpinner.getSelectedItem().toString().equals("None"))
+            {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String name = nameEditText.getText().toString();
+            String id = idEditText.getText().toString();
+            String key = keyEditText.getText().toString();
+            String phone = phoneEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String department = departmentSpinner.getSelectedItem().toString();
+            String gender = genderSpinner.getSelectedItem().toString();
+            String role = roleSpinner.getSelectedItem().toString();
+
+            try {
+                // Lưu thông tin vào Firebase Realtime Database
+                addEmpToFirebaseRealtime(id);
+
+                // Lưu thông tin vào Firestore
+                Employee employee = new Employee(name, id, key, phone, email, department, gender, role);
+                addEmptoFireStore(employee);
+
+                //reset form
+                nameEditText.setText("");
+                idEditText.setText("");
+                keyEditText.setText("");
+                phoneEditText.setText("");
+                emailEditText.setText("");
+                departmentSpinner.setSelection(0);
+                genderSpinner.setSelection(0);
+                roleSpinner.setSelection(0);
+
+                Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "Tạo tài khoản thất bại!", Toast.LENGTH_SHORT).show();
+            }
+
         });
+
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.create_employee_account), (v, insets) -> {
@@ -104,4 +161,13 @@ public class Create_Employee_Account extends AppCompatActivity {
             return insets;
         });
     }
+
+     void addEmpToFirebaseRealtime(String id){
+        DBRealtime.child("Employee").child(id).child("password").setValue("12345678");
+        }
+     void addEmptoFireStore(Employee e)
+     {
+         firestore.collection("Employee").document(e.getId()).set(e);
+     }
+
 }

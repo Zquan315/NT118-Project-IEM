@@ -80,11 +80,11 @@ public class depart_emp_fragment extends Fragment {
 
 
         employeeList = new ArrayList<>();
-        employeeList.add(new Employee("Tô Công Quân", "Nhân sự", "Trưởng phòng", "1190"));
-        employeeList.add(new Employee("Nguyễn Thành Thạo", "IT", "Nhân viên", "1371"));
-        employeeList.add(new Employee("Lâm Hoàng Phước", "IT", "Nhân viên", "1153"));
-        employeeList.add(new Employee("Huỳnh Ngọc Anh Kiệt", "IT", "Nhân viên", "0718"));
-        employeeList.add(new Employee("Lê Hoàng Nam", "IT", "Nhân viên", "1111"));
+//        employeeList.add(new Employee("Tô Công Quân", "IT", "Nhân viên", "1190"));
+//        employeeList.add(new Employee("Nguyễn Thành Thạo", "IT", "Nhân viên", "1371"));
+//        employeeList.add(new Employee("Lâm Hoàng Phước", "IT", "Nhân viên", "1153"));
+//        employeeList.add(new Employee("Huỳnh Ngọc Anh Kiệt", "IT", "Nhân viên", "0718"));
+
 
         employeeAdapter = new EmployeeAdapter(employeeList);
         recyclerView.setAdapter(employeeAdapter);

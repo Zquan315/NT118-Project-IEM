@@ -30,11 +30,10 @@ public class Employee_ImageButton extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView_employeeList);
         List<Employee> employeeList = new ArrayList<>();
         // tạo 6 phòng ban
-        employeeList.add(new Employee("Tô Công Quân", "Nhân sự", "Trưởng phòng", "1190"));
-        employeeList.add(new Employee("Nguyễn Thành Thạo", "IT", "Nhân viên", "1371"));
-        employeeList.add(new Employee("Lâm Hoàng Phước", "IT", "Nhân viên", "1153"));
-        employeeList.add(new Employee("Huỳnh Ngọc Anh Kiệt", "IT", "Nhân viên", "0718"));
-        employeeList.add(new Employee("Lê Hoàng Nam", "IT", "Nhân viên", "1111"));
+        employeeList.add(new Employee("Tô Công Quân", "1190", "1", "1190", "dddh@gm.com", "Phát triển phần mềm", "Nam", "nhan vien"));
+        employeeList.add(new Employee("Nguyễn Thành Thạo", "1371", "2", "1371", "dddh@gm.com", "Hạ tầng IT", "Nam", "nhan vien"));
+        employeeList.add(new Employee("Lâm Hoàng Phước", "1153", "3", "1153", "dddh@gm.com", "An ninh mạng", "Nam", "nhan vien"));
+        employeeList.add(new Employee("Huỳnh Ngọc Anh Kiệt", "0718", "4", "0718", "dddh@gm.com", "Quản lý dự án", "Nam", "nhan vien"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         EmployeeAdapter employeeAdapter = new EmployeeAdapter(employeeList);

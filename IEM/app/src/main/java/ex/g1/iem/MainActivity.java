@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // khoi tao fireabse
         FirebaseApp.initializeApp(this);
-        DBRealtime = FirebaseDatabase.getInstance().getReference();
-        DBRealtime.child("Admin").child("username").setValue("admin");
-        DBRealtime.child("Admin").child("password").setValue("admin");
+
 
          //Xử lý sự kiện khi nút "Quên mật khẩu" được nhấn
         Button forgotPass = findViewById(R.id.forgotPasswordTextBtn);
