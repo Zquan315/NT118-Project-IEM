@@ -1,5 +1,4 @@
 package ex.g1.iem;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,19 +10,30 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class MainActivity extends AppCompatActivity {
+    private DatabaseReference DBRealtime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        // khoi tao fireabse
+        FirebaseApp.initializeApp(this);
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
+        DBRealtime.child("Admin").child("username").setValue("admin");
+        DBRealtime.child("Admin").child("password").setValue("admin");
 
          //Xử lý sự kiện khi nút "Quên mật khẩu" được nhấn
         Button forgotPass = findViewById(R.id.forgotPasswordTextBtn);
         forgotPass.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, forgotPass_UI.class));
         });
+
 
         //Xử lý sự kiện khi nút "Đăng nhập" được nhấn
         EditText user = findViewById(R.id.UserEditText);

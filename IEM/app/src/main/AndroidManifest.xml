@@ -25,9 +25,6 @@
             android:name=".Deep_Event.Info_Employee"
             android:exported="false" />
         <activity
-            android:name=".Deep_Event.Create_Pass_For_Account"
-            android:exported="false" />
-        <activity
             android:name=".Deep_Event.Change_Security_Emp"
             android:exported="false" />
         <activity
