@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="Tô Công Quân"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="22521190"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 
@@ -113,7 +113,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="IEM6541"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 
@@ -137,7 +137,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="Nhân sự"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 
@@ -164,7 +164,7 @@
                     android:textColor="@color/black"
                     android:autoLink="phone"
                     android:background="@drawable/edittext_border"
-                    android:text="0784310104"
+                    android:text=""
                     />
             </LinearLayout>
 
@@ -191,7 +191,7 @@
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="22521190@gm.uit.edu.vn"
+                    android:text=""
                     />
             </LinearLayout>
 
@@ -215,7 +215,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="Nam"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 
@@ -239,7 +239,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:background="@drawable/edittext_border"
-                    android:text="Trưởng phòng"
+                    android:text=""
                     android:enabled="false" />
             </LinearLayout>
 

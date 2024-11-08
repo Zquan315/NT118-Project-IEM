@@ -26,6 +26,7 @@ import ex.g1.iem.R;
 public class project_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+    String usernameEmp;
     public RecyclerView recyclerView;
     public List<ProjectManage> projectManageList;
     public ProjectManageAdapter ProjectManageAdapter;
@@ -74,6 +75,9 @@ public class project_emp_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_emp_fragment, container, false);
+        assert getArguments() != null;
+        usernameEmp = getArguments().getString("username");
+
 
         recyclerView = view.findViewById(R.id.recyclerView_project_emp);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.AlertAdapter;
-import ex.g1.iem.Deep_Event.Add_Alert;
+import ex.g1.iem.Deep_Event.Create_Alert;
 import ex.g1.iem.ImageButton_Home_Admin.Depart_ImageButton;
 import ex.g1.iem.ImageButton_Home_Admin.Employee_ImageButton;
 import ex.g1.iem.ImageButton_Home_Admin.Finance_ImageButton;
@@ -32,7 +32,7 @@ import ex.g1.iem.R;
 public class home_admin_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-
+    String usernameAdmin;
     private RecyclerView recyclerView;
     private AlertAdapter alertAdapter;
     private List<String> alertList;
@@ -82,6 +82,8 @@ public class home_admin_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home_admin_fragment, container, false);
+        assert getArguments() != null;
+        usernameAdmin = getArguments().getString("username"); // username = admin
 
         //Xử lí sự kiện khi nhấn các ImageButton
         ImageButton departImageButton = view.findViewById(R.id.departImageButton);
@@ -114,7 +116,7 @@ public class home_admin_fragment extends Fragment {
         //Xử lí sự kiện khi nhấn nút thêm thông báo
         ImageButton addAlertImageButton = view.findViewById(R.id.addAlertImageButton);
         addAlertImageButton.setOnClickListener(v ->{
-            Intent intent = new Intent(getActivity(), Add_Alert.class);
+            Intent intent = new Intent(getActivity(), Create_Alert.class);
             startActivity(intent);
         });
 

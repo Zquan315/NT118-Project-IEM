@@ -19,18 +19,19 @@ import fragment.manage_admin_fragment;
 import fragment.setting_admin_fragment;
 
 public class mainScreen_admin_UI extends AppCompatActivity {
-
+    String usernameAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_screen_admin_ui);
+        usernameAdmin = getIntent().getStringExtra("username");
 
         // ẩn thanh điều hướng
         View decorView = getWindow().getDecorView();
         ((View) decorView).setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        loadFragment(new home_admin_fragment());
+        loadFragment(new home_admin_fragment(), usernameAdmin);
 
         //fragment thay đổi theo tab
         BottomNavigationView bottomNavigation_bar = findViewById(R.id.bottom_navigation);
@@ -38,15 +39,15 @@ public class mainScreen_admin_UI extends AppCompatActivity {
             Fragment fragment = null;
             if (item.getItemId() == R.id.home) {
                 fragment = new home_admin_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameAdmin);
                 return true;
             } else if (item.getItemId() == R.id.manage) {
                 fragment = new manage_admin_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameAdmin);
                 return true;
             } else if (item.getItemId() == R.id.setting) {
                 fragment = new setting_admin_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameAdmin);
                 return true;
             }
             return false;
@@ -58,12 +59,15 @@ public class mainScreen_admin_UI extends AppCompatActivity {
             return insets;
         });
     }
-    private void loadFragment(Fragment fragment) {
+    private void loadFragment(Fragment fragment, String username) {
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        fragment.setArguments(bundle);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
-        BottomNavigationView bottomNavigation_bar = findViewById(R.id.bottom_navigation);
     }
 
 }

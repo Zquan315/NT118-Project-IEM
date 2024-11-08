@@ -23,7 +23,7 @@ import fragment.setting_admin_fragment;
 import fragment.user_emp_fragment;
 
 public class mainScreen_emp_UI extends AppCompatActivity {
-
+    String usernameEmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,27 +33,27 @@ public class mainScreen_emp_UI extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         ((View) decorView).setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_main_screen_emp_ui);
-
-        loadFragment(new home_emp_fragment());
+        usernameEmp = getIntent().getStringExtra("username");
+        loadFragment(new home_emp_fragment(), usernameEmp);
         BottomNavigationView bottomNavigation_bar = findViewById(R.id.bottom_navigation);
         bottomNavigation_bar.setOnNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
             if (item.getItemId() == R.id.home) {
                 fragment = new home_emp_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameEmp);
                 return true;
             } else if (item.getItemId() == R.id.depart) {
                 fragment = new depart_emp_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameEmp);
                 return true;
             } else if (item.getItemId() == R.id.project) {
                 fragment = new project_emp_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameEmp);
                 return true;
             }
             else if (item.getItemId() == R.id.profile) {
                 fragment = new user_emp_fragment();
-                loadFragment(fragment);
+                loadFragment(fragment, usernameEmp);
                 return true;
             }
             return false;
@@ -66,10 +66,15 @@ public class mainScreen_emp_UI extends AppCompatActivity {
         });
     }
 
-    private void loadFragment(Fragment fragment) {
+    private void loadFragment(Fragment fragment, String username) {
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        fragment.setArguments(bundle);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
 }

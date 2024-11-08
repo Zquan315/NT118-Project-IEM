@@ -29,6 +29,7 @@ import ex.g1.iem.R;
 public class setting_admin_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+    String usernameAdmin;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -74,6 +75,9 @@ public class setting_admin_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setting_admin_fragment, container, false);
+        assert getArguments() != null;
+        usernameAdmin = getArguments().getString("username"); // username = admin
+
         Button addEmployButton = view.findViewById(R.id.addEmployButton);
         addEmployButton.setOnClickListener(v -> {
             startActivity(new Intent(this.getActivity(), Create_Employee_Account.class));
@@ -89,7 +93,9 @@ public class setting_admin_fragment extends Fragment {
         //xử lý nút thay đổi bảo mật
         Button changeSecurityButton = view.findViewById(R.id.changeSecurityButton);
         changeSecurityButton.setOnClickListener(v -> {
-            startActivity(new Intent(this.getActivity(), Change_Security_Admin.class));
+            Intent intent = new Intent(this.getActivity(), Change_Security_Admin.class);
+            intent.putExtra("username", usernameAdmin);
+            startActivity(intent);
         });
 
         //xử lý nút đăng xuất

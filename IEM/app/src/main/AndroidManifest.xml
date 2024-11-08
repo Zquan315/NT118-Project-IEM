@@ -13,6 +13,9 @@
         android:theme="@style/Theme.IEM"
         tools:targetApi="31">
         <activity
+            android:name=".Deep_Event.Create_Alert"
+            android:exported="false" />
+        <activity
             android:name=".Deep_Event.Resource_Info"
             android:exported="false" />
         <activity

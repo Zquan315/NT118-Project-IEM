@@ -1,16 +1,17 @@
 package Class;
 
 public class Employee {
-    private final String name;
-    private final String depart;
-    private final String role;
-    private final String id;
-    private final String key;
-    private final String phone;
-    private final String email;
-    private final String gender;
+    private  String name;
+    private  String depart;
+    private  String role;
+    private  String id;
+    private  String key;
+    private  String phone;
+    private  String email;
+    private  String gender;
 
-
+    public Employee() {
+    }
     public Employee(String name, String id, String key, String phone, String email, String department, String gender, String role) {
         this.name = name;
         this.id = id;

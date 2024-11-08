@@ -2,6 +2,7 @@ package ex.g1.iem.Deep_Event;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,12 +10,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -79,7 +84,7 @@ public class Create_Employee_Account extends AppCompatActivity {
             }
             String prefixID = "", id ="", key="", prefixKey = "IEM";
             String getDepart = departmentSpinner.getSelectedItem().toString();
-            if(getDepart.equals("Phát triển pần mềm"))
+            if(getDepart.equals("Phát triển phần mềm"))
                 prefixID = "SD";
             else if(getDepart.equals("Hạ tầng IT"))
                 prefixID = "INF";
@@ -127,6 +132,10 @@ public class Create_Employee_Account extends AppCompatActivity {
             String role = roleSpinner.getSelectedItem().toString();
 
             try {
+                checkIfUsernameExists(id, exists -> {
+                    if (exists) {
+                        Toast.makeText(this, "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+                        return;}
                 // Lưu thông tin vào Firebase Realtime Database
                 addEmpToFirebaseRealtime(id);
 
@@ -145,6 +154,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 roleSpinner.setSelection(0);
 
                 Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                });
             }
             catch (Exception e)
             {
@@ -163,11 +173,29 @@ public class Create_Employee_Account extends AppCompatActivity {
     }
 
      void addEmpToFirebaseRealtime(String id){
-        DBRealtime.child("Employee").child(id).child("password").setValue("12345678");
+        DBRealtime.child("Account").child(id).child("password").setValue("12345678");
         }
      void addEmptoFireStore(Employee e)
      {
          firestore.collection("Employee").document(e.getId()).set(e);
      }
+
+    public void checkIfUsernameExists(String id, OnUsernameCheckListener listener) {
+        DBRealtime.child("Account").child(id).child("password").get()
+                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful() && task.getResult().exists()) {
+                            listener.onUsernameExists(true);  // Tồn tại
+                        } else {
+                            listener.onUsernameExists(false); // Không tồn tại hoặc có lỗi
+                        }
+                    }
+                });
+    }
+
+    public interface OnUsernameCheckListener {
+        void onUsernameExists(boolean exists);
+    }
 
 }

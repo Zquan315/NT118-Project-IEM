@@ -204,10 +204,10 @@
                 android:id="@+id/addAlertImageButton"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/add_ic"
                 android:backgroundTint="@android:color/transparent"
                 android:contentDescription="Nút thêm thông báo"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/add_ic" />
         </LinearLayout>
 
         <LinearLayout

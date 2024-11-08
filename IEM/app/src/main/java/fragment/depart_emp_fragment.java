@@ -26,7 +26,7 @@ import ex.g1.iem.R;
 public class depart_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-
+    String usernameEmp;
     public RecyclerView recyclerView;
     public List<Employee> employeeList;
     public EmployeeAdapter employeeAdapter;
@@ -74,7 +74,10 @@ public class depart_emp_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_depart_emp_fragment, container, false);
+        assert getArguments() != null;
+        usernameEmp = getArguments().getString("username");
 
+        //Xử lí danh sách nhân viên
         recyclerView = view.findViewById(R.id.recyclerView_Depart_emp);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

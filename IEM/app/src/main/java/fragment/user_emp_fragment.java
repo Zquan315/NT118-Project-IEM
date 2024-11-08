@@ -8,12 +8,22 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
+import Class.Employee;
 import ex.g1.iem.Deep_Event.Change_Security_Emp;
 import ex.g1.iem.MainActivity;
 import ex.g1.iem.R;
@@ -26,6 +36,9 @@ import ex.g1.iem.R;
 public class user_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
+    String usernameEmp;
+    FirebaseFirestore firestore;
+    DatabaseReference DBRealtime;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -70,10 +83,55 @@ public class user_emp_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_emp_fragment, container, false);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        assert getArguments() != null;
+        usernameEmp = getArguments().getString("username");
+        FirebaseApp.initializeApp(this.requireActivity());
+        firestore = FirebaseFirestore.getInstance();
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
+        EditText nameEditText = view.findViewById(R.id.name_info_emp);
+        EditText idEditText = view.findViewById(R.id.id_info_emp);
+        EditText keyEditText = view.findViewById(R.id.key_info_emp);
+        EditText phoneEditText = view.findViewById(R.id.phone_info_emp);
+        EditText emailEditText = view.findViewById(R.id.email_info_emp);
+        EditText departmentEditText = view.findViewById(R.id.depart_info_emp);
+        EditText genderEditText = view.findViewById(R.id.sex_info_emp);
+        EditText roleEditText = view.findViewById(R.id.role_info_emp);
+        //Todo: Load dữ liệu và thay đổi thông tin
+        //Load dữ liệu
+
+        try {
+            getEmpFromFireStore(usernameEmp, new EmployeeCallback() {
+                @Override
+                public void onCallback(Employee employee) {
+                    if (employee != null) {
+                        nameEditText.setText(employee.getName());
+                        idEditText.setText(employee.getId());
+                        keyEditText.setText(employee.getKey());
+                        phoneEditText.setText(employee.getPhone());
+                        emailEditText.setText(employee.getEmail());
+                        departmentEditText.setText(employee.getDepart());
+                        genderEditText.setText(employee.getGender());
+                        roleEditText.setText(employee.getRole());
+                    } else {
+                        Toast.makeText(getActivity(), "Không tìm thấy thông tin nhân viên", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+       catch (Exception e)
+       {
+           Toast.makeText(getActivity(), "Lỗi", Toast.LENGTH_SHORT).show();
+       }
+
+        //ToDo: Lưu thông tin
+        Button save_info = view.findViewById(R.id.save_info_button);
+
+
         Button change_security_emp = view.findViewById(R.id.change_secure_button);
         change_security_emp.setOnClickListener(v->{
-            startActivity(new Intent(getActivity(), Change_Security_Emp.class));
+            Intent intent = new Intent(getActivity(), Change_Security_Emp.class);
+            intent.putExtra("username", usernameEmp);
+            startActivity(intent);
         });
 
         ImageButton logoutButton = view.findViewById(R.id.logoutButton);
@@ -103,4 +161,26 @@ public class user_emp_fragment extends Fragment {
         return view;
 
     }
+    public interface EmployeeCallback {
+        void onCallback(Employee employee);
+    }
+    void getEmpFromFireStore(String documentId, EmployeeCallback callback) {
+        firestore.collection("Employee").document(documentId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Employee employee = documentSnapshot.toObject(Employee.class);
+                        callback.onCallback(employee);
+                    } else {
+                        System.out.println("Document does not exist!");
+                        callback.onCallback(null);  // Trả về null nếu không tìm thấy tài liệu
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    System.out.println("Error retrieving document: " + e.getMessage());
+                    callback.onCallback(null);
+                });
+    }
+
+
 }
