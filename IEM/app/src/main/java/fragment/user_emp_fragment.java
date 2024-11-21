@@ -21,6 +21,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 import Class.Employee;
@@ -125,7 +127,7 @@ public class user_emp_fragment extends Fragment {
 
         //ToDo: Lưu thông tin
         Button save_info = view.findViewById(R.id.save_info_button);
-
+        
 
         Button change_security_emp = view.findViewById(R.id.change_secure_button);
         change_security_emp.setOnClickListener(v->{
@@ -173,7 +175,7 @@ public class user_emp_fragment extends Fragment {
                         callback.onCallback(employee);
                     } else {
                         System.out.println("Document does not exist!");
-                        callback.onCallback(null);  // Trả về null nếu không tìm thấy tài liệu
+                        callback.onCallback(null);
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -182,5 +184,6 @@ public class user_emp_fragment extends Fragment {
                 });
     }
 
+    //todo: hàm update thông tin nhân viên
 
 }
