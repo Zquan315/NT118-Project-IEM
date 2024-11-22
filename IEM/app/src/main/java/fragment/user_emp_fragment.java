@@ -127,7 +127,10 @@ public class user_emp_fragment extends Fragment {
 
         //ToDo: Lưu thông tin
         Button save_info = view.findViewById(R.id.save_info_button);
-        
+
+
+        //todo: end Lưu thông tin
+
 
         Button change_security_emp = view.findViewById(R.id.change_secure_button);
         change_security_emp.setOnClickListener(v->{
