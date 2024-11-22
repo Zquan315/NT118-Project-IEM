@@ -120,7 +120,7 @@ public class home_admin_fragment extends Fragment {
             startActivity(intent);
         });
 
-        // Hiển thị các thông báo
+        //todo:  Hiển thị các thông báo
         alertList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             alertList.add("Thông báo " + (i + 1));
@@ -129,6 +129,7 @@ public class home_admin_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
         recyclerView.setAdapter(alertAdapter);
+        //todo: end
         return view;
     }
 

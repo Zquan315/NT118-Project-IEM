@@ -71,6 +71,8 @@ public class home_emp_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_emp_fragment, container, false);
+
+        //todo: hiển thị thông báo
         alertList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             alertList.add("Thông báo " + (i + 1));
@@ -79,6 +81,7 @@ public class home_emp_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
         recyclerView.setAdapter(alertAdapter);
+        // todo: end 
         return view;
     }
 }
