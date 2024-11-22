@@ -127,7 +127,11 @@ public class user_emp_fragment extends Fragment {
 
         //ToDo: Lưu thông tin
         Button save_info = view.findViewById(R.id.save_info_button);
-
+        save_info.setOnClickListener(v->{
+            String newEmail = emailEditText.getText().toString();
+            String newPhone = phoneEditText.getText().toString();
+            updateEmployee(usernameEmp, newEmail, newPhone);
+        });
 
         //todo: end Lưu thông tin
 
@@ -188,5 +192,34 @@ public class user_emp_fragment extends Fragment {
     }
 
     //todo: hàm update thông tin nhân viên
-
+    void updateEmployee(String id, String newEmail, String newPhone) {
+        firestore.collection("Employee")
+                .whereEqualTo("id", id) // Tìm document với trường `id` cụ thể
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot result = task.getResult();
+                        if (!result.isEmpty()) {
+                            for (QueryDocumentSnapshot document : result) {
+                                // Lấy document ID từ Firestore
+                                String docId = document.getId();
+                                // Cập nhật thông tin email và phone
+                                firestore.collection("Employee")
+                                        .document(docId)
+                                        .update("email", newEmail, "phone", newPhone)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Toast.makeText(getActivity(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getActivity(), "Lỗi", Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Không tìm thấy ID nhân viên", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),"Lỗi", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }
