@@ -24,7 +24,6 @@ public class Info_Alert extends AppCompatActivity {
     TextView titleAlert_TextView, idAlert_TextView, contentAlert_TextView, time_TextView;
     FirebaseFirestore firestore;
     DatabaseReference DBRealtime;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,25 @@ public class Info_Alert extends AppCompatActivity {
         //todo: load dữ liệu
         idAlert_TextView.setText(AlertID);
         titleAlert_TextView.setText(AlertTitle);
+        if (AlertID != null) {
+            firestore.collection("Alert").document(AlertID)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // Gán dữ liệu từ Firestore vào các TextView
+                            String content = documentSnapshot.getString("content");
+                            String time = documentSnapshot.getString("time");
 
+                            contentAlert_TextView.setText(content);
+                            time_TextView.setText(time);
+                        } else {
+                            contentAlert_TextView.setText("Dữ liệu không tồn tại.");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        contentAlert_TextView.setText("Lỗi khi tải dữ liệu.");
+                    });
+        }
         //todo: back button
         findViewById(R.id.backButton).setOnClickListener(v -> {finish();});
         //todo: end
