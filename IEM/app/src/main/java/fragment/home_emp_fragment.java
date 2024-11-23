@@ -10,12 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.AlertAdapter;
 import ex.g1.iem.R;
-
+import Class.Alert;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link home_emp_fragment#newInstance} factory method to
@@ -24,9 +29,12 @@ import ex.g1.iem.R;
 public class home_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    private RecyclerView recyclerView;
-    private AlertAdapter alertAdapter;
-    private List<String> alertList;
+    String usernameEmp;
+    RecyclerView recyclerView;
+    AlertAdapter alertAdapter;
+    ArrayList<Alert> alertList;
+    FirebaseFirestore firestore;
+    DatabaseReference DBRealtime;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -71,17 +79,23 @@ public class home_emp_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_emp_fragment, container, false);
+        assert getArguments() != null;
+        usernameEmp = getArguments().getString("username");
+        FirebaseApp.initializeApp(this.requireActivity());
+        firestore = FirebaseFirestore.getInstance();
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
 
         //todo: hiển thị thông báo
         alertList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            alertList.add("Thông báo " + (i + 1));
+            alertList.add(new Alert("ID" + i, "Thông báo " + (i + 1)));
         }
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
         recyclerView.setAdapter(alertAdapter);
-        // todo: end 
+        // todo: end
+
         return view;
     }
 }

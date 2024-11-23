@@ -4,19 +4,22 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 import Class.Department;
 import ex.g1.iem.R;
 
 public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.DepartmentViewHolder> {
 
-    private final List<Department> listDepartment;
+    private final ArrayList<Department> listDepartment;
 
-    public DepartmentAdapter(List<Department> listDepartment) {
+    public DepartmentAdapter(ArrayList<Department> listDepartment) {
         this.listDepartment = listDepartment;
     }
 
@@ -31,8 +34,9 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.De
     @Override
     public void onBindViewHolder(@NonNull DepartmentViewHolder holder, int position) {
         Department department = listDepartment.get(position);
+        holder.txtID.setText("Mã phòng: " + department.getID());
         holder.txtName.setText(department.getName());
-        holder.txtHeader.setText("Trưởng phòng ban: " + department.getHeader());
+        holder.txtHeader.setText("Mã trưởng phòng: " + department.getHeader());
         holder.txtAmountEmployee.setText("Số lượng nhân viên: " + department.getAmount_employee());
         holder.txtAmountProject.setText("Số lượng dự án: " + department.getAmount_project());
         holder.imgDepartment.setImageResource(department.getImageResource());
@@ -44,12 +48,13 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.De
     }
 
     public static class DepartmentViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtHeader, txtAmountEmployee, txtAmountProject;
+        TextView txtID,txtName, txtHeader, txtAmountEmployee, txtAmountProject;
         ImageView imgDepartment;
 
         public DepartmentViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.Name_of_department);
+            txtID = itemView.findViewById(R.id.id_department);
             txtHeader = itemView.findViewById(R.id.header_department);
             txtAmountEmployee = itemView.findViewById(R.id.amount_employee);
             txtAmountProject = itemView.findViewById(R.id.amount_project);

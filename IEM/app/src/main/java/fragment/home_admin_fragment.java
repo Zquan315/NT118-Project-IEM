@@ -11,10 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import Class.Alert;
 import Adapter.AlertAdapter;
 import ex.g1.iem.Deep_Event.Create_Alert;
 import ex.g1.iem.ImageButton_Home_Admin.Depart_ImageButton;
@@ -33,9 +39,11 @@ public class home_admin_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     String usernameAdmin;
-    private RecyclerView recyclerView;
-    private AlertAdapter alertAdapter;
-    private List<String> alertList;
+    RecyclerView recyclerView;
+    AlertAdapter alertAdapter;
+    ArrayList<Alert> alertList;
+    FirebaseFirestore firestore;
+    DatabaseReference DBRealtime;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,6 +92,9 @@ public class home_admin_fragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home_admin_fragment, container, false);
         assert getArguments() != null;
         usernameAdmin = getArguments().getString("username"); // username = admin
+        FirebaseApp.initializeApp(this.requireActivity());
+        firestore = FirebaseFirestore.getInstance();
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
 
         //Xử lí sự kiện khi nhấn các ImageButton
         ImageButton departImageButton = view.findViewById(R.id.departImageButton);
@@ -123,13 +134,14 @@ public class home_admin_fragment extends Fragment {
         //todo:  Hiển thị các thông báo
         alertList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            alertList.add("Thông báo " + (i + 1));
+            alertList.add(new Alert("ID" + i, "Thông báo " + (i + 1)));
         }
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
         recyclerView.setAdapter(alertAdapter);
         //todo: end
+
         return view;
     }
 

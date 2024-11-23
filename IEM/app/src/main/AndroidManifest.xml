@@ -13,6 +13,9 @@
         android:theme="@style/Theme.IEM"
         tools:targetApi="31">
         <activity
+            android:name=".Deep_Event.Info_Alert"
+            android:exported="false" />
+        <activity
             android:name=".Deep_Event.Create_Alert"
             android:exported="false" />
         <activity
@@ -38,9 +41,6 @@
             android:exported="false" />
         <activity
             android:name=".Deep_Event.Salary_Edit"
-            android:exported="false" />
-        <activity
-            android:name=".Deep_Event.Add_Alert"
             android:exported="false" />
         <activity
             android:name=".ImageButton_Home_Admin.Finance_ImageButton"
@@ -74,7 +74,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
