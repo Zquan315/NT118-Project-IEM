@@ -53,6 +53,7 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertViewHol
             //todo: chuyển sang màn hình chi tiết thông báo
             Intent intent = new Intent(holder.itemView.getContext(), Info_Alert.class);
             intent.putExtra("alertID", holder.alertID.getText().toString());
+            intent.putExtra("alertTitle", holder.alertTitle.getText().toString());
             holder.itemView.getContext().startActivity(intent);
         });
     }

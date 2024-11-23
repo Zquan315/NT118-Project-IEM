@@ -20,7 +20,7 @@ import ex.g1.iem.R;
 
 public class Info_Alert extends AppCompatActivity {
 
-    String AlertID;
+    String AlertID, AlertTitle;
     TextView titleAlert_TextView, idAlert_TextView, contentAlert_TextView, time_TextView;
     FirebaseFirestore firestore;
     DatabaseReference DBRealtime;
@@ -34,13 +34,14 @@ public class Info_Alert extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         DBRealtime = FirebaseDatabase.getInstance().getReference();
         AlertID = getIntent().getStringExtra("alertID");
+        AlertTitle = getIntent().getStringExtra("alertTitle");
         titleAlert_TextView = findViewById(R.id.titleAlert_TextView);
         idAlert_TextView = findViewById(R.id.idAlert_TextView);
         contentAlert_TextView = findViewById(R.id.contentAlert_TextView);
         time_TextView = findViewById(R.id.time_TextView);
         //todo: load dữ liệu
         idAlert_TextView.setText(AlertID);
-
+        titleAlert_TextView.setText(AlertTitle);
 
         //todo: back button
         findViewById(R.id.backButton).setOnClickListener(v -> {finish();});

@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -88,6 +90,7 @@ public class home_admin_fragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,7 +141,7 @@ public class home_admin_fragment extends Fragment {
         alertList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-// Truy xuất dữ liệu từ Firestore
+        // Truy xuất dữ liệu từ Firestore
         db.collection("Alert")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -154,8 +157,7 @@ public class home_admin_fragment extends Fragment {
                     alertAdapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> {
-                    // Xử lý lỗi khi lấy dữ liệu
-                    Log.e("FirestoreError", "Lỗi khi lấy dữ liệu từ Firestore: ", e);
+                    Toast.makeText(getContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
                 });
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

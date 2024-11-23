@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -76,6 +78,7 @@ public class home_emp_fragment extends Fragment {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,24 +94,23 @@ public class home_emp_fragment extends Fragment {
         alertList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-// Truy xuất dữ liệu từ Firestore
-        db.collection("Employee")
+        // Truy xuất dữ liệu từ Firestore
+        db.collection("Alert")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         String id = document.getId(); // Lấy ID của document
-                        String name = document.getString("name"); // Lấy trường name
+                        String title = document.getString("title");
 
-                        if (name != null) { // Đảm bảo name không null
-                            alertList.add(new Alert(id, name)); // Thêm vào danh sách
+                        if (title != null) {
+                            alertList.add(new Alert(id, title)); // Thêm vào danh sách
                         }
                     }
                     // Cập nhật giao diện sau khi lấy dữ liệu thành công
                     alertAdapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> {
-                    // Xử lý lỗi khi lấy dữ liệu
-                    Log.e("FirestoreError", "Lỗi khi lấy dữ liệu từ Firestore: ", e);
+                    Toast.makeText(getContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
                 });
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
