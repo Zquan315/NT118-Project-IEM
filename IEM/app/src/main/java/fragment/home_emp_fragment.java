@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -87,9 +89,27 @@ public class home_emp_fragment extends Fragment {
 
         //todo: hiển thị thông báo
         alertList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            alertList.add(new Alert("ID" + i, "Thông báo " + (i + 1)));
-        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+// Truy xuất dữ liệu từ Firestore
+        db.collection("Employee")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId(); // Lấy ID của document
+                        String name = document.getString("name"); // Lấy trường name
+
+                        if (name != null) { // Đảm bảo name không null
+                            alertList.add(new Alert(id, name)); // Thêm vào danh sách
+                        }
+                    }
+                    // Cập nhật giao diện sau khi lấy dữ liệu thành công
+                    alertAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý lỗi khi lấy dữ liệu
+                    Log.e("FirestoreError", "Lỗi khi lấy dữ liệu từ Firestore: ", e);
+                });
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
