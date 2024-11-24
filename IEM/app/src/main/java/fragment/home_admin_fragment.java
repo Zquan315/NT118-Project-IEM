@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.Toast;
@@ -49,7 +50,7 @@ public class home_admin_fragment extends Fragment {
     ArrayList<Alert> alertList;
     FirebaseFirestore firestore;
     DatabaseReference DBRealtime;
-
+    Button clear_All_Button;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -101,6 +102,7 @@ public class home_admin_fragment extends Fragment {
         FirebaseApp.initializeApp(this.requireActivity());
         firestore = FirebaseFirestore.getInstance();
         DBRealtime = FirebaseDatabase.getInstance().getReference();
+        clear_All_Button = view.findViewById(R.id.clear_all_Button);
 
         //Xử lí sự kiện khi nhấn các ImageButton
         ImageButton departImageButton = view.findViewById(R.id.departImageButton);
@@ -139,14 +141,15 @@ public class home_admin_fragment extends Fragment {
 
         //todo:  Hiển thị các thông báo
         alertList = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Truy xuất dữ liệu từ Firestore
-        db.collection("Alert")
+        firestore.collection("Alert")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         String id = document.getId(); // Lấy ID của document
+                        if(id.equals("thongbao"))
+                            continue;
                         String title = document.getString("title"); // Lấy trường title
 
                         if (title != null) { // Đảm bảo title không null
@@ -163,8 +166,34 @@ public class home_admin_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         alertAdapter = new AlertAdapter(alertList);
         recyclerView.setAdapter(alertAdapter);
-        //todo: end
 
+        //todo: Xóa tất cả thông báo
+        clear_All_Button.setOnClickListener(v -> {
+            try {
+                if(alertList.isEmpty())
+                    return;
+                firestore.collection("Alert")
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            List<String> idsToRemove = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                String documentId = document.getId();
+                                if (!documentId.equals("thongbao")) {
+                                    idsToRemove.add(documentId);
+                                    firestore.collection("Alert").document(documentId).delete();
+                                }
+                            }
+                            alertList.removeIf(alert -> idsToRemove.contains(alert.getId()));
+                            alertAdapter.notifyDataSetChanged();
+                            Toast.makeText(getContext(), "Xóa tất cả thông báo thành công", Toast.LENGTH_SHORT).show();
+                        });
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Lỗi khi xóa thông báo", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //todo: end
         return view;
     }
 

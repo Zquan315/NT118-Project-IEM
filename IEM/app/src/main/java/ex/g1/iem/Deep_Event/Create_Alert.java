@@ -90,7 +90,6 @@ public class Create_Alert extends AppCompatActivity {
                 idEditText.setText("");
                 titleEditText.setText("");
                 contentEditText.setText("");
-                Toast.makeText(this,"Thêm Thông Báo Thành Công !", Toast.LENGTH_LONG).show();
             }
             catch (Exception e)
             {
