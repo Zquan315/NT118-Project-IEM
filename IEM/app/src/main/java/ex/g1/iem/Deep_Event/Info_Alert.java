@@ -3,6 +3,7 @@ package ex.g1.iem.Deep_Event;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,18 +47,17 @@ public class Info_Alert extends AppCompatActivity {
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            // Gán dữ liệu từ Firestore vào các TextView
                             String content = documentSnapshot.getString("content");
                             String time = documentSnapshot.getString("time");
 
                             contentAlert_TextView.setText(content);
                             time_TextView.setText(time);
                         } else {
-                            contentAlert_TextView.setText("Dữ liệu không tồn tại.");
+                            Toast.makeText(this, "Không tìm thấy thông báo.", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
-                        contentAlert_TextView.setText("Lỗi khi tải dữ liệu.");
+                        Toast.makeText(this, "Lỗi khi lấy dữ liệu.", Toast.LENGTH_SHORT).show();
                     });
         }
         //todo: back button

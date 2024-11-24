@@ -45,26 +45,12 @@
             android:textColorHint="@color/hintColor"
             android:background="@drawable/edittext_border" />
 
-        <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Tên nhân viên"
-            android:textColor="@color/black"
-            android:inputType="text"
-            android:maxLines="1"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/hintColor"
-            android:background="@drawable/edittext_border"
-            />
-
 
         <Button
             android:id="@+id/confirmButton"
             android:layout_width="300dp"
             android:layout_height="55dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@color/buttonColor"
             android:text="Xóa tài khoản"
             android:layout_gravity="center"
