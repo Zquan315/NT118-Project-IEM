@@ -1,4 +1,6 @@
 package ex.g1.iem;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +22,14 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseReference DBRealtime;
+    DatabaseReference DBRealtime;
+    FirebaseFirestore firestore;
     String username;
     String password;
+    EditText user, pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +38,61 @@ public class MainActivity extends AppCompatActivity {
         // khoi tao fireabse
         FirebaseApp.initializeApp(this);
         DBRealtime = FirebaseDatabase.getInstance().getReference();
-
+        firestore = FirebaseFirestore.getInstance();
+        user = findViewById(R.id.UserEditText);
+        pass = findViewById(R.id.passEditText);
          //Xử lý sự kiện khi nút "Quên mật khẩu" được nhấn
         Button forgotPass = findViewById(R.id.forgotPasswordTextBtn);
         forgotPass.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, forgotPass_UI.class));
+            username = user.getText().toString();
+            if(user.getText().toString().isEmpty())
+            {
+                user.setError("Trống");
+                return;
+            }
+
+            if(username.equals("admin"))
+            {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("Thông báo");
+                dialog.setMessage("Bạn hãy xin cấp lại tài khoản admin!");
+
+                // Nút OK
+                dialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+            else
+            {
+                firestore.collection("Employee").document(username).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                Intent intent = new Intent(MainActivity.this, forgotPass_UI.class);
+                                intent.putExtra("username", username);
+                                startActivity(intent);
+                            }
+                            else
+                            {
+                                user.setError("Không tìm thấy id " + username);
+                                return;
+                            }
+                        });
+            }
         });
 
 
         //Xử lý sự kiện khi nút "Đăng nhập" được nhấn
-        EditText user = findViewById(R.id.UserEditText);
-        EditText pass = findViewById(R.id.passEditText);
+
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(v -> {
             try {
+                username = user.getText().toString();
+                password = pass.getText().toString();
                 if (user.getText().toString().isEmpty()) {
                     user.setError("Trống");
                     return;
@@ -55,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     pass.setError("Trống");
                     return;
                 }
-
-                username = user.getText().toString();
-                password = pass.getText().toString();
 
                 getPasswordFromFirebaseRealtime(username, new FirebaseCallback() {
                     @Override

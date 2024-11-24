@@ -51,7 +51,7 @@
         android:layout_height="50dp"
         android:hint="Xác nhận mật khẩu"
         android:textColor="@color/black"
-        android:inputType="number"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:layout_marginTop="20dp"
         android:textColorHint="@color/hintColor"
