@@ -39,6 +39,7 @@ public class SalaryAdapter extends RecyclerView.Adapter<SalaryAdapter.SalaryView
     public void onBindViewHolder(@NonNull SalaryViewHolder holder, int position) {
         SalaryManagement employee = listSalary.get(position);
         holder.txtName.setText(employee.getName());
+        holder.txtID.setText("Mã nhân viên: " + employee.getId());
         holder.txtBasicSalary.setText("Lương cơ bản: " + employee.getBasicSalary() + " VND");
         holder.txtLeaveDays.setText("Số ngày nghỉ: " + employee.getLeaveDays());
         holder.txtTotalSalary.setText("Lương tổng kết: " + employee.getTotalSalary() + " VND");
@@ -47,6 +48,7 @@ public class SalaryAdapter extends RecyclerView.Adapter<SalaryAdapter.SalaryView
         holder.itemView.setOnClickListener(v -> {
             // Gửi tất cả dữ liệu sang Salary_Edit
             Intent intent = new Intent(v.getContext(), Salary_Edit.class);
+            intent.putExtra("employee_id", employee.getId());
             intent.putExtra("employee_name", employee.getName());
             intent.putExtra("employee_basicSalary", employee.getBasicSalary());
             intent.putExtra("employee_leaveDays", Integer.toString(employee.getLeaveDays()));
@@ -61,12 +63,13 @@ public class SalaryAdapter extends RecyclerView.Adapter<SalaryAdapter.SalaryView
     }
 
     public static class SalaryViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtBasicSalary, txtLeaveDays, txtTotalSalary;
+        TextView txtName,txtID, txtBasicSalary, txtLeaveDays, txtTotalSalary;
         ImageView imgEmployee;
 
         public SalaryViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
+            txtID = itemView.findViewById(R.id.txtID);
             txtBasicSalary = itemView.findViewById(R.id.txtBasicSalary);
             txtLeaveDays = itemView.findViewById(R.id.txtLeaveDays);
             txtTotalSalary = itemView.findViewById(R.id.txtTotalSalary);

@@ -24,8 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import Class.Employee;
-import java.util.Random;
 
+import java.util.Objects;
+import java.util.Random;
+import Class.SalaryManagement;
 import ex.g1.iem.R;
 
 public class Create_Employee_Account extends AppCompatActivity {
@@ -142,6 +144,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 // Lưu thông tin vào Firestore
                 Employee employee = new Employee(name, id, key, phone, email, department, gender, role);
                 addEmptoFireStore(employee);
+                addToSalary(id, name, role);
 
                 //reset form
                 nameEditText.setText("");
@@ -178,6 +181,11 @@ public class Create_Employee_Account extends AppCompatActivity {
      void addEmptoFireStore(Employee e)
      {
          firestore.collection("Employee").document(e.getId()).set(e);
+     }
+     void addToSalary(String id, String name, String role)
+     {
+         firestore.collection("Salary").document(id).set(
+                 new SalaryManagement(id, name, Objects.equals(role, "Trưởng phòng") ?"20000000":"15000000", 0, "0"));
      }
 
     public void checkIfUsernameExists(String id, OnUsernameCheckListener listener) {

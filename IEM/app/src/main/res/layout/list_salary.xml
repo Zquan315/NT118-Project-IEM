@@ -36,6 +36,13 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/txtID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Mã nhân viên: "
+                android:textSize="14sp" />
+            <TextView
                 android:id="@+id/txtBasicSalary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

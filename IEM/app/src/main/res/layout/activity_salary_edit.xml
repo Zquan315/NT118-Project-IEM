@@ -53,6 +53,16 @@
             android:layout_margin="10dp"
             android:textColor="@color/buttonColor"
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/id_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên nhân viên"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:textColor="@color/blue"
+            android:textStyle="bold"/>
         <!--luong co ban-->
         <LinearLayout
             android:orientation="horizontal"
@@ -197,7 +207,17 @@
                 android:layout_margin="10dp"
                 android:layout_gravity="center"/>
         </LinearLayout>
-
+        <Button
+            android:id="@+id/reset_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/buttonColor"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

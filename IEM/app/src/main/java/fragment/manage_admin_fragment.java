@@ -12,6 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +39,8 @@ public class manage_admin_fragment extends Fragment {
     public RecyclerView recyclerView;
     public  List<SalaryManagement> employeeList;
     public SalaryAdapter salaryAdapter;
+    FirebaseFirestore firestore;
+    DatabaseReference DBRealtime;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -71,25 +80,44 @@ public class manage_admin_fragment extends Fragment {
         }
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "NotifyDataSetChanged"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manage_admin_fragment, container, false);
-
-
+        FirebaseApp.initializeApp(this.requireContext());
+        firestore = FirebaseFirestore.getInstance();
+        DBRealtime = FirebaseDatabase.getInstance().getReference();
         recyclerView = view.findViewById(R.id.recyclerView_mana);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         employeeList = new ArrayList<>();
-        employeeList.add(new SalaryManagement("Tô Công Quân", "20000000", 0, "20000000"));
-        employeeList.add(new SalaryManagement("Nguyễn Thành Thạo", "15000000" , 1, "14750000"));
-        employeeList.add(new SalaryManagement("Lâm Hoàng Phước", "12500000", 4, "11500000"));
-        employeeList.add(new SalaryManagement("Huỳnh Ngọc Anh Kiệt", "12500000", 2, "12000000"));
-        employeeList.add(new SalaryManagement("Lê Hoàng Nam", "12500000" , 3, "12250000"));
-
         salaryAdapter = new SalaryAdapter(employeeList);
         recyclerView.setAdapter(salaryAdapter);
+        //todo: load danh sách lương
+        firestore.collection("Salary")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId(); // Lấy ID của document
+                        if(id.equals("id"))
+                            continue;
+                        String name = document.getString("name");
+                        String basicSalary = document.getString("basicSalary");
+                        Long leaveDays = document.getLong("leaveDays");
+                        String totalSalary = document.getString("totalSalary");
+                        int leaveDaysInt = (leaveDays != null) ? leaveDays.intValue() : 0;
+                        employeeList.add(new SalaryManagement(
+                                id,name,basicSalary,leaveDaysInt,totalSalary ));
+                    }
+                    // Cập nhật giao diện sau khi lấy dữ liệu thành công
+                    salaryAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
+
+
         return view;
     }
 }

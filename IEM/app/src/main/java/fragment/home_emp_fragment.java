@@ -92,10 +92,8 @@ public class home_emp_fragment extends Fragment {
 
         //todo: hiển thị thông báo
         alertList = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         // Truy xuất dữ liệu từ Firestore
-        db.collection("Alert")
+        firestore.collection("Alert")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
