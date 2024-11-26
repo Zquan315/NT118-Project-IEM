@@ -24,7 +24,6 @@
 
     <string-array name="role_array">
         <item>None</item>
-        <item>Trưởng phòng</item>
         <item>Nhân viên</item>
     </string-array>
 </resources>

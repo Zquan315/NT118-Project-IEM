@@ -12,7 +12,8 @@ public class Employee {
 
     public Employee() {
     }
-    public Employee(String name, String id, String key, String phone, String email, String department, String gender, String role) {
+    public Employee(String id, String name,  String key, String phone,
+                    String email, String department, String gender, String role) {
         this.name = name;
         this.id = id;
         this.key = key;

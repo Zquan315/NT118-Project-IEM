@@ -22,6 +22,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import Class.Employee;
 
@@ -145,7 +146,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 Employee employee = new Employee(name, id, key, phone, email, department, gender, role);
                 addEmptoFireStore(employee);
                 addToSalary(id, name, role);
-
+                add_numEmptoDepartment(department);
                 //reset form
                 nameEditText.setText("");
                 idEditText.setText("");
@@ -186,6 +187,10 @@ public class Create_Employee_Account extends AppCompatActivity {
      {
          firestore.collection("Salary").document(id).set(
                  new SalaryManagement(id, name, Objects.equals(role, "Trưởng phòng") ?"20000000":"15000000", 0, "0"));
+     }
+     void add_numEmptoDepartment(String department)
+     {
+         firestore.collection("Department").document(department).update("amount_emp", FieldValue.increment(1));
      }
 
     public void checkIfUsernameExists(String id, OnUsernameCheckListener listener) {

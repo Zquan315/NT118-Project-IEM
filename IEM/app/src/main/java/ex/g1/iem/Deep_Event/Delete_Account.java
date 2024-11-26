@@ -65,6 +65,7 @@ public class Delete_Account extends AppCompatActivity {
                     dialog.setPositiveButton("OK", (dialog1, which) -> {
                         DBRealtime.child("Account").child(ID).removeValue();
                         firestore.collection("Employee").document(ID).delete();
+                        firestore.collection("Salary").document(ID).delete();
                         Toast.makeText(Delete_Account.this, "Xóa tài khoản thành công", Toast.LENGTH_SHORT).show();
                         IDEditText.setText("");
                     });

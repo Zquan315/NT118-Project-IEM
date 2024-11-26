@@ -2,6 +2,8 @@ package ex.g1.iem.ImageButton_Home_Admin;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import Adapter.EmployeeAdapter;
@@ -27,25 +30,53 @@ import ex.g1.iem.R;
 public class Employee_ImageButton extends AppCompatActivity {
 
     FirebaseFirestore firestore;
+    TextView num_of_employee_emp;
     DatabaseReference DBRealtime;
-    @SuppressLint("MissingInflatedId")
+    ArrayList<Employee> employeeList;
+    RecyclerView recyclerView;
+    EmployeeAdapter employeeAdapter;
+    @SuppressLint({"MissingInflatedId", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_employee_image_button);
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_employeeList);
-        List<Employee> employeeList = new ArrayList<>();
+        num_of_employee_emp = findViewById(R.id.num_of_employee_emp);
+        recyclerView = findViewById(R.id.recyclerView_employeeList);
+        employeeList = new ArrayList<>();
         FirebaseApp.initializeApp(this);
         firestore = FirebaseFirestore.getInstance();
         DBRealtime = FirebaseDatabase.getInstance().getReference();
-        // todo: load danh sách nhân viên
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EmployeeAdapter employeeAdapter = new EmployeeAdapter(employeeList);
+        employeeAdapter = new EmployeeAdapter(employeeList);
         recyclerView.setAdapter(employeeAdapter);
+        // todo: load danh sách nhân viên
+        firestore.collection("Employee")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId(); // Lấy ID của document
+                        if(id.equals("tocongquanmmtt"))
+                            continue;
+                        String name = document.getString("name");
+                        String department = document.getString("depart");
+                        String email = document.getString("email");
+                        String gender = document.getString("gender");
+                        String key = document.getString("key");
+                        String phone = document.getString("phone");
+                        String role = document.getString("role");
+                        employeeList.add(new Employee(id, name, key, phone, email,
+                                department, gender, role));
+                    }
+                    // todo: Cập nhật giao diện sau khi lấy dữ liệu thành công
+                    employeeAdapter.notifyDataSetChanged();
+                    //todo: hiển thị số lượng nhân viên
+                    num_of_employee_emp.setText(String.valueOf(employeeList.size()));
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
+
 
         // Xử lí sự kiện khi nhấn nút back
         findViewById(R.id.backButton).setOnClickListener(v -> finish());

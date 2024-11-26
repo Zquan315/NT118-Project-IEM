@@ -46,6 +46,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
             intent.putExtra("depart", employee.getDepart());
             intent.putExtra("role", employee.getRole());
             intent.putExtra("id", employee.getId());
+            intent.putExtra("phone", employee.getPhone());
+            intent.putExtra("email", employee.getEmail());
+            intent.putExtra("gender", employee.getGender());
             v.getContext().startActivity(intent);
         });
     }

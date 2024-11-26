@@ -111,7 +111,6 @@
                 android:enabled="false"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="0784310104"
                 />
         </LinearLayout>
 
@@ -137,7 +136,6 @@
                 android:enabled="false"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="22521190@gm.uit.edu.vn"
                 android:singleLine="false"
                 android:scrollHorizontally="false"
                 android:maxLines="2"
@@ -164,7 +162,6 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="Nam"
                 android:enabled="false" />
         </LinearLayout>
 
