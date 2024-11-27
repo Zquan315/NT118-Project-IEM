@@ -113,22 +113,27 @@ public class home_admin_fragment extends Fragment {
 
         departImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Depart_ImageButton.class);
+            intent.putExtra("username", usernameAdmin);
             startActivity(intent);
         });
         employeeImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Employee_ImageButton.class);
+            intent.putExtra("username", usernameAdmin);
             startActivity(intent);
         });
         planImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Project_ImageButton.class);
+            intent.putExtra("username", usernameAdmin);
             startActivity(intent);
         });
         resImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Resource_ImageButton.class);
+            intent.putExtra("username", usernameAdmin);
             startActivity(intent);
         });
         financeImageButton.setOnClickListener(v ->{
             Intent intent = new Intent(getActivity(), Finance_ImageButton.class);
+            intent.putExtra("username", usernameAdmin);
             startActivity(intent);
         });
 

@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +79,7 @@ public class project_emp_fragment extends Fragment {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,21 +87,53 @@ public class project_emp_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_project_emp_fragment, container, false);
         assert getArguments() != null;
         usernameEmp = getArguments().getString("username");
-
-
         recyclerView = view.findViewById(R.id.recyclerView_project_emp);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         projectManageList = new ArrayList<>();
-        for (int i = 1; i < 6; i++)
-        {
-            int a = i + 90;
-            projectManageList.add(new ProjectManage("00" + Integer.toString(i),
-                    "IEM" + Integer.toString(i*5), "IT"));
-        }
-        ProjectManageAdapter = new ProjectManageAdapter(projectManageList);
+        ProjectManageAdapter = new ProjectManageAdapter(projectManageList, usernameEmp);
         recyclerView.setAdapter(ProjectManageAdapter);
+        FirebaseApp.initializeApp(this.requireContext());
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FloatingActionButton fab = view.findViewById(R.id.fab_add_project);
+        //todo: chi Truong phong moi thay nut FAB
+        firestore.collection("Employee").document(usernameEmp).get()
+                        .addOnCompleteListener(task -> {
+                            String role = task.getResult().getString("role");
+                            if (task.isSuccessful()) {
+                                if(role != null && role.equals("Trưởng phòng"))
+                                {
+                                   fab.setVisibility(View.VISIBLE);
+                                }
+                                else
+                                {
+                                    fab.setVisibility(View.GONE);
+                                }
+                            }
+                            else {
+                                Toast.makeText(this.requireContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+        //todo: load danh sach du an
+        firestore.collection("Project")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId(); // Lấy ID của document
+//                        if(id.equals("id"))
+//                            continue;
+                        String description = document.getString("description");
+                        String name = document.getString("name");
+                        String underTake = document.getString("underTake");
+
+                        projectManageList.add(new ProjectManage(id, name,underTake, description ));
+                    }
+                    // Cập nhật giao diện sau khi lấy dữ liệu thành công
+                    ProjectManageAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this.requireContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
         
         return view;   
     }

@@ -17,9 +17,11 @@ import ex.g1.iem.R;
 public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdapter.ProjectManageViewHolder> {
 
     private final List<ProjectManage> listProjectManage;
+    private final String username;
 
-    public ProjectManageAdapter(List<ProjectManage> listProjectManage) {
+    public ProjectManageAdapter(List<ProjectManage> listProjectManage, String username) {
         this.listProjectManage = listProjectManage;
+        this.username = username;
     }
 
     @NonNull
@@ -43,6 +45,7 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
             intent.putExtra("name", ProjectManage.getName());
             intent.putExtra("id", ProjectManage.getID());
             intent.putExtra("undertake", ProjectManage.getUnderTake());
+            intent.putExtra("username", username);
             v.getContext().startActivity(intent);
         });
     }

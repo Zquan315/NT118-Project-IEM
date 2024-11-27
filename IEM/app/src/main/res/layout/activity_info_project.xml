@@ -83,7 +83,6 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="Nhân sự"
                 android:enabled="false" />
         </LinearLayout>
         <TextView
@@ -97,21 +96,34 @@
             />
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="0dp"
+            android:layout_weight="7"
+            android:background="@drawable/edittext_border"
             android:layout_margin="10dp">
 
             <TextView
                 android:id="@+id/project_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/example_description"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="5dp"
                 />
         </ScrollView>
+
+        <Button
+            android:id="@+id/finish_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Hoàn thành"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/buttonColor"
+            android:layout_gravity="end
+"/>
 
     </LinearLayout>
 
