@@ -17,8 +17,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import ex.g1.iem.MainActivity;
@@ -64,11 +66,38 @@ public class Delete_Account extends AppCompatActivity {
                     dialog.setMessage("Bạn có chắc chắn muốn xóa nhân viên: " + ID + " không?");
                     dialog.setPositiveButton("OK", (dialog1, which) -> {
                         DBRealtime.child("Account").child(ID).removeValue();
-                        firestore.collection("Employee").document(ID).delete();
                         firestore.collection("Salary").document(ID).delete();
-                        Toast.makeText(Delete_Account.this, "Xóa tài khoản thành công", Toast.LENGTH_SHORT).show();
-                        IDEditText.setText("");
+                        firestore.collection("Employee").document(ID).get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        String depart = task.getResult().getString("depart");
+                                        if (depart != null) {
+                                            firestore.collection("Department").document(depart)
+                                                    .update("amount_emp", FieldValue.increment(-1))
+                                                    .addOnCompleteListener(updateTask -> {
+                                                        if (updateTask.isSuccessful()) {
+                                                            firestore.collection("Employee").document(ID).delete()
+                                                                    .addOnCompleteListener(deleteTask -> {
+                                                                        if (deleteTask.isSuccessful()) {
+                                                                            Toast.makeText(Delete_Account.this, "Xóa tài khoản thành công", Toast.LENGTH_SHORT).show();
+                                                                            IDEditText.setText("");
+                                                                        } else {
+                                                                            Toast.makeText(Delete_Account.this, "Lỗi khi xóa tài khoản", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                        } else {
+                                                            Toast.makeText(Delete_Account.this, "Lỗi khi cập nhật phòng ban", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                    else {
+                                        Toast.makeText(Delete_Account.this, "Không thể truy xuất thông tin nhân viên", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                     });
+
                     dialog.setNegativeButton("Hủy", (dialog1, which) -> dialog1.dismiss());
                     AlertDialog alertDialog = dialog.create();
                     alertDialog.show();

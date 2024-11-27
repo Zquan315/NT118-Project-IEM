@@ -143,7 +143,7 @@ public class Create_Employee_Account extends AppCompatActivity {
                 addEmpToFirebaseRealtime(id);
 
                 // Lưu thông tin vào Firestore
-                Employee employee = new Employee(name, id, key, phone, email, department, gender, role);
+                Employee employee = new Employee(id, name, key, phone, email, department, gender, role);
                 addEmptoFireStore(employee);
                 addToSalary(id, name, role);
                 add_numEmptoDepartment(department);

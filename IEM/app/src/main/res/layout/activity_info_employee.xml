@@ -84,7 +84,6 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="Nhân sự"
                 android:enabled="false" />
         </LinearLayout>
 
@@ -185,9 +184,18 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:background="@drawable/edittext_border"
-                android:text="Trưởng phòng"
                 android:enabled="false" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/ChangeRole_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="Thay đổi vai trò"
+            android:layout_margin="50dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
