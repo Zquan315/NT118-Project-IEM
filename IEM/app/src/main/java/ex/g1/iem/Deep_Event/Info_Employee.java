@@ -76,44 +76,76 @@ public class Info_Employee extends AppCompatActivity {
         }
 
         //todo: Cập nhật chức khi thay thăng và giáng
-//        changeRole.setOnClickListener(v -> {
-//            assert id_ != null;
-//            assert depart_ != null;
-//            if(upRole) {
-//                String CurrentHeader = firestore.collection("Department").document(depart_).
-//                        get().getResult().getString("id_header");
-//                if(CurrentHeader != null && !CurrentHeader.isEmpty())
-//                {
-//                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//                    dialog.setTitle("Thông báo");
-//                    dialog.setMessage(id_ + " đang là trưởng phòng của phòng ban "+ depart_);
-//
-//                    dialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                    AlertDialog alertDialog = dialog.create();
-//                    alertDialog.show();
-//                }
-//                else {
-//                    firestore.collection("Employee").document(id_).update("role", "Trưởng phòng");
-//                    firestore.collection("Salary").document(id_).update("basicSalary", "20000000");
-//                    firestore.collection("Department").document(depart_).update("id_header", id_);
-//                }
-//                return;
-//            }
-//
-//            if(downRole) {
-//
-//                firestore.collection("Employee").document(id_).update("role", "Nhân viên");
-//                firestore.collection("Salary").document(id_).update("basicSalary", "15000000");
-//                firestore.collection("Department").document(depart_).update("id_header", "");
-//                Toast.makeText(this, "Giáng chức thành công", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//        });
+        changeRole.setOnClickListener(v -> {
+            try {
+                assert id_ != null;
+                assert depart_ != null;
+                if (upRole) {
+                    firestore.collection("Department").document(depart_).get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    String currentHeader = task.getResult().getString("id_header");
+                                    if (currentHeader != null && !currentHeader.isEmpty()) {
+                                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                                        dialog.setTitle("Thông báo");
+                                        dialog.setMessage(currentHeader + " là trưởng phòng trong phòng ban " + depart_);
+                                        dialog.setNegativeButton("OK", (dialog1, which) -> dialog1.dismiss());
+                                        dialog.create().show();
+                                    }
+                                    else {
+                                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                                        dialog.setTitle("Thông báo");
+                                        dialog.setMessage("Bạn có chắc chắn muốn thăng chức nhân viên này?");
+
+                                        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                firestore.collection("Employee").document(id_).update("role", "Trưởng phòng")
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            firestore.collection("Salary").document(id_).update("basicSalary", "20000000");
+                                                            firestore.collection("Department").document(depart_).update("id_header", id_);
+                                                            Toast.makeText(Info_Employee.this, "Thăng chức thành công", Toast.LENGTH_SHORT).show();
+                                                        })
+                                                        .addOnFailureListener(e -> Toast.makeText(Info_Employee.this, "Lỗi khi thăng chức", Toast.LENGTH_SHORT).show());
+                                            }
+                                        });
+                                        dialog.setNegativeButton("Hủy", (dialog12, which) -> dialog12.dismiss());
+                                        dialog.create().show();
+                                    }
+                                }
+                                else {
+                                    Toast.makeText(this, "Không thể truy xuất dữ liệu phòng ban", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    return;
+                }
+
+
+                if (downRole) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    dialog.setTitle("Thông báo");
+                    dialog.setMessage("Bạn có chắc chắn muốn giáng chức nhân viên này?");
+
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            firestore.collection("Employee").document(id_).update("role", "Nhân viên")
+                                    .addOnSuccessListener(aVoid -> {
+                                        firestore.collection("Salary").document(id_).update("basicSalary", "15000000");
+                                        firestore.collection("Department").document(depart_).update("id_header", "");
+                                        Toast.makeText(Info_Employee.this, "Giáng chức thành công", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(Info_Employee.this, "Lỗi khi giáng chức", Toast.LENGTH_SHORT).show());
+                        }
+                    });
+                    dialog.setNegativeButton("Hủy", (dialog12, which) -> dialog12.dismiss());
+                    dialog.create().show();
+                }
+
+            } catch (Exception ex) {
+                Toast.makeText(this, "Lỗi khi thay đổi chức vụ", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
