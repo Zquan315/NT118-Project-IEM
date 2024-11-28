@@ -33,12 +33,14 @@ public class HardWareAdapter extends RecyclerView.Adapter<HardWareAdapter.HardWa
     @Override
     public void onBindViewHolder(@NonNull HardWareViewHolder holder, int position) {
         Resource HardWare = listHardWare.get(position);
+        holder.txtID.setText(HardWare.getId());
         holder.txtName.setText(HardWare.getName());
         holder.txtNum.setText(Integer.toString(HardWare.getNum()));
         holder.imgHardWare.setImageResource(R.drawable.hardware_ic);
 
         holder.itemView.setOnClickListener(v-> {
             Intent intent = new Intent(v.getContext(), Resource_Info.class);
+            intent.putExtra("id", HardWare.getId());
             intent.putExtra("name", HardWare.getName());
             intent.putExtra("num", HardWare.getNum());
             intent.putExtra("type", HardWare.getType());
@@ -52,11 +54,12 @@ public class HardWareAdapter extends RecyclerView.Adapter<HardWareAdapter.HardWa
     }
 
     public static class HardWareViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtNum;
+        TextView txtName, txtNum, txtID;
         ImageView imgHardWare;
 
         public HardWareViewHolder(@NonNull View itemView) {
             super(itemView);
+            txtID = itemView.findViewById(R.id.id_hardware);
             txtName = itemView.findViewById(R.id.name_resource);
             txtNum = itemView.findViewById(R.id.num_hardware);
             imgHardWare = itemView.findViewById(R.id.icon_hardware);

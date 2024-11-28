@@ -36,6 +36,28 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="16sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Mã tài nguyên: "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/id_software"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="id"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

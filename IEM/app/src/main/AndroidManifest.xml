@@ -13,6 +13,9 @@
         android:theme="@style/Theme.IEM"
         tools:targetApi="31">
         <activity
+            android:name=".Deep_Event.Create_Resource"
+            android:exported="false" />
+        <activity
             android:name=".Deep_Event.Info_Alert"
             android:exported="false" />
         <activity
@@ -74,6 +77,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

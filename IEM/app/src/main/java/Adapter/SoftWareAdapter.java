@@ -33,12 +33,14 @@ public class SoftWareAdapter extends RecyclerView.Adapter<SoftWareAdapter.SoftWa
     @Override
     public void onBindViewHolder(@NonNull SoftWareViewHolder holder, int position) {
         Resource SoftWare = listSoftWare.get(position);
+        holder.txtID.setText(SoftWare.getId());
         holder.txtName.setText(SoftWare.getName());
         holder.txtNum.setText(Integer.toString(SoftWare.getNum()));
         holder.imgSoftWare.setImageResource(R.drawable.software_ic);
 
         holder.itemView.setOnClickListener(v-> {
             Intent intent = new Intent(v.getContext(), Resource_Info.class);
+            intent.putExtra("id", SoftWare.getId());
             intent.putExtra("name", SoftWare.getName());
             intent.putExtra("num", SoftWare.getNum());
             intent.putExtra("type", SoftWare.getType());
@@ -52,11 +54,12 @@ public class SoftWareAdapter extends RecyclerView.Adapter<SoftWareAdapter.SoftWa
     }
 
     public static class SoftWareViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtNum;
+        TextView txtName, txtNum, txtID;
         ImageView imgSoftWare;
 
         public SoftWareViewHolder(@NonNull View itemView) {
             super(itemView);
+            txtID = itemView.findViewById(R.id.id_software);
             txtName = itemView.findViewById(R.id.name_resource);
             txtNum = itemView.findViewById(R.id.num_software);
             imgSoftWare = itemView.findViewById(R.id.icon_software);

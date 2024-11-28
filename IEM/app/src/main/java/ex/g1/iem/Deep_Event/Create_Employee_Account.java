@@ -110,6 +110,7 @@ public class Create_Employee_Account extends AppCompatActivity {
             key = prefixKey + String.valueOf(randomKey);
             idEditText.setText(id);
             keyEditText.setText(key);
+            departmentSpinner.setEnabled(false);
         });
 
 

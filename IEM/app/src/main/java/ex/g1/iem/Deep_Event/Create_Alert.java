@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import ex.g1.iem.R;
 
@@ -50,6 +51,7 @@ public class Create_Alert extends AppCompatActivity {
         genID = findViewById(R.id.Generate_ID_Button);
         // TODO: xử lý sự kiện khi nhấn nút thêm thông báo
         genID.setOnClickListener(v -> {
+            //todo: tạo id ngẫu nhiên
             Random random = new Random();
             int randomNumber = 1000 + random.nextInt(9000);
             String id = "AL" + String.valueOf(randomNumber);
@@ -64,8 +66,31 @@ public class Create_Alert extends AppCompatActivity {
                     Toast.makeText(this, "Vui lòng điền đầy đủ thông tin ! ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //tạo id ngẫu nhiên
+                AtomicBoolean check = new AtomicBoolean(false);
+                //todo: nếu ID tồn tại thì báo lỗi
+                db.collection("Alert").document(idEditText.getText().toString()).get()
+                        .addOnCompleteListener(task -> {
+                            if(task.isSuccessful())
+                            {
+                                if(task.getResult().exists())
+                                {
+                                    check.set(true);
+                                }
+                            }
+                            else
+                            {
+                                Toast.makeText(this,"Lỗi khi kiểm tra ID !", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
+                if(check.get())
+                {
+                    Toast.makeText(this,"ID đã tồn tại !", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                //todo: thêm thông báo vào database
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedNow = now.format(formatter);
@@ -76,15 +101,12 @@ public class Create_Alert extends AppCompatActivity {
                 data.put("time", formattedNow);
                 data.put("content", contentEditText.getText().toString());
 
-                // Thêm document vào collection "Alerrt"
                 db.collection("Alert").document(documentID)
                         .set(data)
                         .addOnSuccessListener(aVoid -> {
-                            // Thành công
                             Toast.makeText(this,"Thêm Thông Báo Thành Công !", Toast.LENGTH_LONG).show();
                         })
                         .addOnFailureListener(e -> {
-                            // Lỗi
                             Toast.makeText(this,"Thêm Thông Báo Thất Bại !", Toast.LENGTH_LONG).show();
                         });
                 idEditText.setText("");

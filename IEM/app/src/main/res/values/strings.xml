@@ -26,4 +26,10 @@
         <item>None</item>
         <item>Nhân viên</item>
     </string-array>
+
+    <string-array name="resource_array">
+        <item>None</item>
+        <item>Phần mềm</item>
+        <item>Phần cứng</item>
+    </string-array>
 </resources>

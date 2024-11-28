@@ -79,7 +79,7 @@
                 android:layout_margin="10dp"/>
 
             <EditText
-                android:id="@+id/amount_resource_EditText"
+                android:id="@+id/amount_Resource_EditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
