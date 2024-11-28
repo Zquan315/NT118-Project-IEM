@@ -42,7 +42,7 @@ public class HardWareAdapter extends RecyclerView.Adapter<HardWareAdapter.HardWa
             Intent intent = new Intent(v.getContext(), Resource_Info.class);
             intent.putExtra("id", HardWare.getId());
             intent.putExtra("name", HardWare.getName());
-            intent.putExtra("num", HardWare.getNum());
+            intent.putExtra("num",Integer.toString(HardWare.getNum()));
             intent.putExtra("type", HardWare.getType());
             v.getContext().startActivity(intent);
         });

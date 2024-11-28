@@ -42,7 +42,7 @@ public class SoftWareAdapter extends RecyclerView.Adapter<SoftWareAdapter.SoftWa
             Intent intent = new Intent(v.getContext(), Resource_Info.class);
             intent.putExtra("id", SoftWare.getId());
             intent.putExtra("name", SoftWare.getName());
-            intent.putExtra("num", SoftWare.getNum());
+            intent.putExtra("num", Integer.toString(SoftWare.getNum()));
             intent.putExtra("type", SoftWare.getType());
             v.getContext().startActivity(intent);
         });
