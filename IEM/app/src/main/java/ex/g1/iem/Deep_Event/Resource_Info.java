@@ -68,7 +68,6 @@ public class Resource_Info extends AppCompatActivity {
                                     firestore.collection("Res").document(type ? "HW" : "SW")
                                             .update(id, array)
                                             .addOnSuccessListener(aVoid -> {
-                                                amountResourceEditText.setText("");
                                                 Toast.makeText(this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
                                             })
                                             .addOnFailureListener(e -> {
