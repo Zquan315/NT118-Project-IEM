@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import ex.g1.iem.R;
 
 public class Info_Employee extends AppCompatActivity {
     DatabaseReference DBRealtime;
+    String username;
     FirebaseFirestore firestore;
     boolean upRole = false;
     boolean downRole = false;
@@ -40,6 +42,7 @@ public class Info_Employee extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         DBRealtime = FirebaseDatabase.getInstance().getReference();
         firestore = FirebaseFirestore.getInstance();
+        username = getIntent().getStringExtra("username");
 
         //TODO: Update with your layout
         TextView name = findViewById(R.id.name_TextView);
@@ -63,6 +66,7 @@ public class Info_Employee extends AppCompatActivity {
         gender.setText(getIntent().getStringExtra("gender"));
         role.setText(r);
 
+
         //TODO: Set Text Thang chuc hoac giang chuc
         assert r != null;
         Button changeRole = findViewById(R.id.ChangeRole_Button);
@@ -74,6 +78,12 @@ public class Info_Employee extends AppCompatActivity {
             changeRole.setText("Thăng chức");
             upRole = true;
         }
+
+        // todo: cho co admin moi duoc thay doi role
+        if(username.equals("admin"))
+            changeRole.setVisibility(View.VISIBLE);
+        else
+            changeRole.setVisibility(View.GONE);
 
         //todo: Cập nhật chức khi thay thăng và giáng
         changeRole.setOnClickListener(v -> {

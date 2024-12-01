@@ -18,9 +18,11 @@ import ex.g1.iem.R;
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> {
 
     private final List<Employee> listEmployee;
+    private final String username;
 
-    public EmployeeAdapter(List<Employee> listEmployee) {
+    public EmployeeAdapter(List<Employee> listEmployee, String username) {
         this.listEmployee = listEmployee;
+        this.username = username;
     }
 
     @NonNull
@@ -42,6 +44,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), Info_Employee.class);
+            intent.putExtra("username", username);
             intent.putExtra("name", employee.getName());
             intent.putExtra("depart", employee.getDepart());
             intent.putExtra("role", employee.getRole());

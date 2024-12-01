@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +33,12 @@ import ex.g1.iem.R;
 public class depart_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    String usernameEmp;
+    String usernameEmp, department;
     public RecyclerView recyclerView;
     public List<Employee> employeeList;
     public EmployeeAdapter employeeAdapter;
+    FirebaseFirestore firestore;
+    TextView name_depart_emp, num_of_employee;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -69,6 +78,7 @@ public class depart_emp_fragment extends Fragment {
         }
     }
 
+    @SuppressLint({"MissingInflatedId", "NotifyDataSetChanged"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,21 +86,48 @@ public class depart_emp_fragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_depart_emp_fragment, container, false);
         assert getArguments() != null;
         usernameEmp = getArguments().getString("username");
-
-        //Xử lí danh sách nhân viên
+        FirebaseApp.initializeApp(this.requireContext());
+        firestore = FirebaseFirestore.getInstance();
+        name_depart_emp = view.findViewById(R.id.name_depart_emp);
+        num_of_employee = view.findViewById(R.id.num_of_employee);
+        //todo: load danh sách nhân viên
         recyclerView = view.findViewById(R.id.recyclerView_Depart_emp);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         employeeList = new ArrayList<>();
-//        employeeList.add(new Employee("Tô Công Quân", "IT", "Nhân viên", "1190"));
-//        employeeList.add(new Employee("Nguyễn Thành Thạo", "IT", "Nhân viên", "1371"));
-//        employeeList.add(new Employee("Lâm Hoàng Phước", "IT", "Nhân viên", "1153"));
-//        employeeList.add(new Employee("Huỳnh Ngọc Anh Kiệt", "IT", "Nhân viên", "0718"));
-
-
-        employeeAdapter = new EmployeeAdapter(employeeList);
+        employeeAdapter = new EmployeeAdapter(employeeList,usernameEmp);
         recyclerView.setAdapter(employeeAdapter);
+        firestore.collection("Employee").document(usernameEmp).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        department = task.getResult().getString("depart");
+                        name_depart_emp.setText(department);
+                    }
+                });
+        firestore.collection("Employee")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId(); // Lấy ID của document
+                        if(id.equals("tocongquanmmtt"))
+                            continue;
+                        String name = document.getString("name");
+                        String depart = document.getString("depart");
+                        String email = document.getString("email");
+                        String gender = document.getString("gender");
+                        String key = document.getString("key");
+                        String phone = document.getString("phone");
+                        String role = document.getString("role");
+                        if(depart != null && depart.equals(department))
+                            employeeList.add(new Employee(id, name, key, phone, email, depart, gender, role));
+                    }
+                    // todo: Cập nhật giao diện sau khi lấy dữ liệu thành công
+                    employeeAdapter.notifyDataSetChanged();
+                    //todo: hiển thị số lượng nhân viên
+                    num_of_employee.setText(String.valueOf(employeeList.size()));
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
+                });
 
         return view;
     }

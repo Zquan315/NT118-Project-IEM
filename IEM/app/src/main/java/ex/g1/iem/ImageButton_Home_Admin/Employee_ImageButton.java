@@ -30,6 +30,7 @@ import ex.g1.iem.R;
 public class Employee_ImageButton extends AppCompatActivity {
 
     FirebaseFirestore firestore;
+    String usernameAdmin;
     TextView num_of_employee_emp;
     DatabaseReference DBRealtime;
     ArrayList<Employee> employeeList;
@@ -40,6 +41,7 @@ public class Employee_ImageButton extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        usernameAdmin = getIntent().getStringExtra("username");
         setContentView(R.layout.activity_employee_image_button);
         num_of_employee_emp = findViewById(R.id.num_of_employee_emp);
         recyclerView = findViewById(R.id.recyclerView_employeeList);
@@ -48,7 +50,7 @@ public class Employee_ImageButton extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         DBRealtime = FirebaseDatabase.getInstance().getReference();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        employeeAdapter = new EmployeeAdapter(employeeList);
+        employeeAdapter = new EmployeeAdapter(employeeList, usernameAdmin);
         recyclerView.setAdapter(employeeAdapter);
         // todo: load danh sách nhân viên
         firestore.collection("Employee")
