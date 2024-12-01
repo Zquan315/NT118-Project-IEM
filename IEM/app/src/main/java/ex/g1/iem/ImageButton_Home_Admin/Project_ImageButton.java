@@ -51,13 +51,14 @@ public class Project_ImageButton extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         String id = document.getId(); // Lấy ID của document
-//                        if(id.equals("id"))
-//                            continue;
+                        if(id.equals("id"))
+                            continue;
                         String description = document.getString("description");
                         String name = document.getString("name");
                         String underTake = document.getString("underTake");
+                        String deadline = document.getString("deadline");
 
-                        projectManageList.add(new ProjectManage(id, name,underTake, description ));
+                        projectManageList.add(new ProjectManage(id, name,underTake, description, deadline ));
                     }
                     // Cập nhật giao diện sau khi lấy dữ liệu thành công
                     projectManageAdapter.notifyDataSetChanged();

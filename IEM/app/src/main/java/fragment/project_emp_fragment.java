@@ -1,6 +1,7 @@
 package fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ import java.util.List;
 import Adapter.ProjectManageAdapter;
 import Class.ProjectManage;
 import Adapter.ProjectManageAdapter;
+import ex.g1.iem.Deep_Event.Create_Project;
 import ex.g1.iem.R;
 
 /**
@@ -36,6 +38,7 @@ public class project_emp_fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     String usernameEmp;
+    String department;
     public RecyclerView recyclerView;
     public List<ProjectManage> projectManageList;
     public ProjectManageAdapter ProjectManageAdapter;
@@ -95,6 +98,14 @@ public class project_emp_fragment extends Fragment {
         FirebaseApp.initializeApp(this.requireContext());
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         FloatingActionButton fab = view.findViewById(R.id.fab_add_project);
+        //todo: lay phong ban
+        firestore.collection("Employee").document(usernameEmp).get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful())
+                    {
+                        department = task.getResult().getString("depart");
+                    }
+                });
         //todo: chi Truong phong moi thay nut FAB
         firestore.collection("Employee").document(usernameEmp).get()
                         .addOnCompleteListener(task -> {
@@ -120,13 +131,14 @@ public class project_emp_fragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         String id = document.getId(); // Lấy ID của document
-//                        if(id.equals("id"))
-//                            continue;
+                        if(id.equals("id"))
+                            continue;
                         String description = document.getString("description");
                         String name = document.getString("name");
                         String underTake = document.getString("underTake");
-
-                        projectManageList.add(new ProjectManage(id, name,underTake, description ));
+                        String deadline = document.getString("deadline");
+                        if(department.equals(underTake))
+                            projectManageList.add(new ProjectManage(id, name,underTake, description , deadline));
                     }
                     // Cập nhật giao diện sau khi lấy dữ liệu thành công
                     ProjectManageAdapter.notifyDataSetChanged();
@@ -134,7 +146,14 @@ public class project_emp_fragment extends Fragment {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this.requireContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
                 });
-        
+
+        //todo: Tao du an
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(project_emp_fragment.this.requireContext(), Create_Project.class);
+            intent.putExtra("username", usernameEmp);
+            startActivity(intent);
+        });
+
         return view;   
     }
 }

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_project"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Deep_Event.Create_Project">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/backround">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:contentDescription="Back to home"
+                android:src="@drawable/back_ic"
+                android:scaleType="fitCenter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tạo dự án"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.33"
+                android:layout_height="wrap_content"
+                android:text="ID:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/ID_Project_EditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_border"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:enabled="false"
+                android:layout_margin="10dp"/>
+
+            <ImageButton
+                android:id="@+id/Generate_ID_PJ_Button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/swap_ic"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên dự án:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/name_project_EditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_border"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:inputType="textMultiLine"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đảm nhận:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/underTake_project_EditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_border"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:inputType="textMultiLine"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hạn dự án:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/day_EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_border"
+                    android:textColor="@color/black"
+                    android:hint="Ngày"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/month_EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/edittext_border"
+                    android:textColor="@color/black"
+                    android:hint="Tháng"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/year_EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_border"
+                    android:textColor="@color/black"
+                    android:hint="Năm"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô tả:"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/description_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:inputType="textMultiLine"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="top"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_border"/>
+
+        <Button
+            android:id="@+id/Create_Project_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonColor"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Tạo dự án"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
