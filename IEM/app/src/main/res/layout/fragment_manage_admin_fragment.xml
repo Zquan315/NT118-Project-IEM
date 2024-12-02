@@ -19,14 +19,38 @@
             android:layout_height="70dp"
             android:title="Danh sách"
             android:background="@drawable/backround"/>
-        <SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="16dp"
-            android:queryHint="Tìm kiếm"
-            android:searchIcon="@drawable/search_ic"
-            android:background="@drawable/edittext_border"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/edittext_border"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="30dp"
+                android:src="@drawable/search_ic"/>
+            <EditText
+                android:id="@+id/search_EditText"
+                android:layout_width="0dp"
+                android:layout_weight="2.5"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:gravity=""
+                android:hint="Mã nhân viên"/>
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:text="Tìm"
+                android:backgroundTint="@color/buttonColor"/>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_mana"

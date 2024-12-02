@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -41,6 +42,8 @@ public class manage_admin_fragment extends Fragment {
     public SalaryAdapter salaryAdapter;
     FirebaseFirestore firestore;
     DatabaseReference DBRealtime;
+    EditText searchEditText;
+    Button searchButton;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -89,6 +92,8 @@ public class manage_admin_fragment extends Fragment {
         FirebaseApp.initializeApp(this.requireContext());
         firestore = FirebaseFirestore.getInstance();
         DBRealtime = FirebaseDatabase.getInstance().getReference();
+        searchEditText = view.findViewById(R.id.search_EditText);
+        searchButton = view.findViewById(R.id.search_button);
         recyclerView = view.findViewById(R.id.recyclerView_mana);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         employeeList = new ArrayList<>();
@@ -116,6 +121,29 @@ public class manage_admin_fragment extends Fragment {
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
                 });
+        //todo: Tìm kiếm
+        searchButton.setOnClickListener(v -> {
+            String searchText = searchEditText.getText().toString().trim();
+            List<SalaryManagement> filteredList = new ArrayList<>();
+
+            if (searchText.isEmpty()) {
+                filteredList.addAll(employeeList);
+            } else {
+                for (SalaryManagement employee : employeeList) {
+                    if (employee.getId().toLowerCase().contains(searchText.toLowerCase())) {
+                        filteredList.add(employee);
+                    }
+                }
+            }
+
+            salaryAdapter = new SalaryAdapter(filteredList);
+            recyclerView.setAdapter(salaryAdapter);
+            salaryAdapter.notifyDataSetChanged();
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(getContext(), "Không tìm thấy kết quả", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return view;
