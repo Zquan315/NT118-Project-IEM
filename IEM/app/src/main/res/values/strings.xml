@@ -32,4 +32,14 @@
         <item>Phần mềm</item>
         <item>Phần cứng</item>
     </string-array>
+
+    <string-array name="departments_array_filter">
+        <item>Tất cả</item>
+        <item>Phát triển phần mềm</item>
+        <item>Hạ tầng IT</item>
+        <item>An ninh mạng</item>
+        <item>Quản lý dự án</item>
+        <item>Nhân sự</item>
+        <item>Hỗ trợ kỹ thuật</item>
+    </string-array>
 </resources>

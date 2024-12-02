@@ -2,6 +2,9 @@ package ex.g1.iem.ImageButton_Home_Admin;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ public class Employee_ImageButton extends AppCompatActivity {
     ArrayList<Employee> employeeList;
     RecyclerView recyclerView;
     EmployeeAdapter employeeAdapter;
+    Spinner filterSpinner;
     @SuppressLint({"MissingInflatedId", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,12 @@ public class Employee_ImageButton extends AppCompatActivity {
         setContentView(R.layout.activity_employee_image_button);
         num_of_employee_emp = findViewById(R.id.num_of_employee_emp);
         recyclerView = findViewById(R.id.recyclerView_employeeList);
+        filterSpinner = findViewById(R.id.filter_emp_spinner);
+        ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this,
+                R.array.departments_array_filter, R.layout.spinner_item);
+        filterAdapter.setDropDownViewResource( R.layout.spinner_dropdown_item);
+        filterSpinner.setAdapter(filterAdapter);
+        filterSpinner.setSelection(0);
         employeeList = new ArrayList<>();
         FirebaseApp.initializeApp(this);
         firestore = FirebaseFirestore.getInstance();
@@ -53,9 +63,54 @@ public class Employee_ImageButton extends AppCompatActivity {
         employeeAdapter = new EmployeeAdapter(employeeList, usernameAdmin);
         recyclerView.setAdapter(employeeAdapter);
         // todo: load danh sách nhân viên
+        loadListemp();
+
+        //todo: lọc
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
+                if (employeeList.isEmpty()) return;
+                String selectedDepartment = parent.getItemAtPosition(position).toString();
+                ArrayList<Employee> filteredList = new ArrayList<>();
+                if(selectedDepartment.equals("Tất cả"))
+                    filteredList.addAll(employeeList);
+                else
+                    for (Employee employee : employeeList) {
+                        if (employee.getDepart().equals(selectedDepartment)) {
+                            filteredList.add(employee);
+                        }
+                    }
+
+
+                employeeAdapter = new EmployeeAdapter(filteredList, usernameAdmin);
+                recyclerView.setAdapter(employeeAdapter);
+                employeeAdapter.notifyDataSetChanged();
+                num_of_employee_emp.setText(String.valueOf(filteredList.size()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                loadListemp();
+            }
+        });
+
+
+        // Xử lí sự kiện khi nhấn nút back
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.employee_imagebutton), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    void loadListemp()
+    {
         firestore.collection("Employee")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    employeeList.clear();
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         String id = document.getId(); // Lấy ID của document
                         if(id.equals("tocongquanmmtt"))
@@ -78,15 +133,5 @@ public class Employee_ImageButton extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Lỗi khi lấy dữ liệu", Toast.LENGTH_SHORT).show();
                 });
-
-
-        // Xử lí sự kiện khi nhấn nút back
-        findViewById(R.id.backButton).setOnClickListener(v -> finish());
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.employee_imagebutton), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 }
