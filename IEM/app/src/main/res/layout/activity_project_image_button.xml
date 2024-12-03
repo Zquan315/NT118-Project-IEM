@@ -41,7 +41,44 @@
                 />
         </LinearLayout>
 
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height= "match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng: "
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/num_of_project"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <Spinner
+                android:id="@+id/filter_project_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_projectList"
             android:layout_weight="1"
