@@ -18,6 +18,10 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import Class.ProjectManage;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -133,30 +137,16 @@ public class Create_Project extends AppCompatActivity {
         });
     }
 
-    boolean isDate(String d, String m, String y)
-    {
-        int day = Integer.parseInt(d);
-        int month = Integer.parseInt(m);
-        int year = Integer.parseInt(y);
-
-        if(isLeapYear(year))
-        {
-            if(month == 2)
-                return day <= 29;
-            if( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                return day <= 31;
-            return day <= 30;
+    boolean isDate(String d, String m, String y) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            String inputDateStr = d + "/" + m + "/" + y ;
+            LocalDate inputDate = LocalDate.parse(inputDateStr, formatter);
+            return inputDate.isAfter(LocalDate.now());
         }
-        else {
-            if(month == 2)
-                return day <= 28;
-            if( month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                return day <= 31;
-            return day <= 30;
+        catch (DateTimeException e) {
+            return false;
         }
     }
 
-    boolean isLeapYear(int year) {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
 }

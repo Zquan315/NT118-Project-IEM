@@ -101,7 +101,7 @@ public class project_emp_fragment extends Fragment {
         //todo: lay phong ban
         firestore.collection("Employee").document(usernameEmp).get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful())
+                    if(task.isSuccessful() && task.getResult().exists())
                     {
                         department = task.getResult().getString("depart");
                     }
@@ -130,7 +130,7 @@ public class project_emp_fragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                        String id = document.getId(); // Lấy ID của document
+                        String id = document.getId();
                         if(id.equals("id"))
                             continue;
                         String description = document.getString("description");
@@ -139,6 +139,7 @@ public class project_emp_fragment extends Fragment {
                         String deadline = document.getString("deadline");
                         if(department.equals(underTake))
                             projectManageList.add(new ProjectManage(id, name,underTake, description , deadline));
+
                     }
                     // Cập nhật giao diện sau khi lấy dữ liệu thành công
                     ProjectManageAdapter.notifyDataSetChanged();
