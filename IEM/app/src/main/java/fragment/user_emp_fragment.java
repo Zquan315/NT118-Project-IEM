@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,6 +131,16 @@ public class user_emp_fragment extends Fragment {
         save_info.setOnClickListener(v->{
             String newEmail = emailEditText.getText().toString();
             String newPhone = phoneEditText.getText().toString();
+            if(!newEmail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(newEmail).matches())
+            {
+                emailEditText.setError("Không hợp lệ");
+                return;
+            }
+            if(!newPhone.isEmpty() && !newPhone.matches("\\d+"))
+            {
+                phoneEditText.setError("Không hợp lệ");
+                return;
+            }
             updateEmployee(usernameEmp, newEmail, newPhone);
         });
 

@@ -3,6 +3,7 @@ package ex.g1.iem.Deep_Event;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -125,7 +126,6 @@ public class Create_Employee_Account extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             String name = nameEditText.getText().toString();
             String id = idEditText.getText().toString();
             String key = keyEditText.getText().toString();
@@ -135,6 +135,18 @@ public class Create_Employee_Account extends AppCompatActivity {
             String gender = genderSpinner.getSelectedItem().toString();
             String role = roleSpinner.getSelectedItem().toString();
 
+            if (!name.matches("^[a-zA-Z\\s]+$")) {
+                nameEditText.setError("Không hợp lệ");
+                return;
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailEditText.setError("Không hợp lệ");
+                return;
+            }
+            if (!phone.matches("\\d+")) {
+                phoneEditText.setError("Không hợp lệ");
+                return;
+            }
             try {
                 checkIfUsernameExists(id, exists -> {
                     if (exists) {

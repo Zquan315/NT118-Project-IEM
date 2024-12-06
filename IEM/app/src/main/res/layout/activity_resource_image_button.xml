@@ -99,5 +99,6 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/buttonColor"
         android:contentDescription="Add Resource"
-        app:srcCompat="@drawable/add_fab" />
+        app:srcCompat="@drawable/add_fab"
+        android:scaleType="fitCenter"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
