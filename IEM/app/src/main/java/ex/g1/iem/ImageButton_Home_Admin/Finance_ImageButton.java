@@ -97,7 +97,7 @@ public class Finance_ImageButton extends AppCompatActivity {
                 sumOfMoneyEditText.setEnabled(false);
             }
             catch (NumberFormatException e) {
-                Toast.makeText(this, "Tổng tiền là số nguyên dương!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Tổng tiền phải chỉ từ 1 đến 2 tỷ!", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -140,7 +140,7 @@ public class Finance_ImageButton extends AppCompatActivity {
                         .update("Sum", newSumStr);
                 loadSumMonney();
                 String newNoti = "Bạn đã thanh toán " + moneyInt + " đồng vào ngày "
-                        + formattedNow + ".Nội dung: " +
+                        + formattedNow + ". Nội dung: " +
                         contentPaymentEditText.getText().toString();
                 firestore.collection("History").document("HP")
                         .update("hp", FieldValue.arrayUnion(newNoti))

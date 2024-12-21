@@ -139,11 +139,11 @@ public class Create_Employee_Account extends AppCompatActivity {
                 nameEditText.setError("Không hợp lệ");
                 return;
             }
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (!email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailEditText.setError("Không hợp lệ");
                 return;
             }
-            if (!phone.matches("\\d+")) {
+            if (!phone.isEmpty() && !phone.matches("\\d+")) {
                 phoneEditText.setError("Không hợp lệ");
                 return;
             }
