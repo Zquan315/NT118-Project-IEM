@@ -154,38 +154,30 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_margin="10dp"
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/day_EditText"
+                    android:id="@+id/deadline_EditText"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@drawable/edittext_border"
                     android:textColor="@color/black"
-                    android:hint="Ngày"
+                    android:enabled="false"
+                    android:layout_gravity="center"
                     android:textSize="16sp"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/month_EditText"
+
+                <Button
+                    android:id="@+id/chooseDeadline_Button"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/edittext_border"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:layout_gravity="center"
+                    android:text="Chọn"
+                    android:backgroundTint="@color/backroundLayout"
                     android:textColor="@color/black"
-                    android:hint="Tháng"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/year_EditText"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edittext_border"
-                    android:textColor="@color/black"
-                    android:hint="Năm"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_margin="5dp"
+                    />
             </LinearLayout>
 
         </LinearLayout>

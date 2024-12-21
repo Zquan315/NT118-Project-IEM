@@ -1,8 +1,10 @@
 package ex.g1.iem.Deep_Event;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -32,8 +34,8 @@ public class Create_Project extends AppCompatActivity {
 
     String usernameEmp;
     EditText idEditText, nameEditText, underTakeEditText,
-    dayEditText, monthEditText, yearEditText, descriptionEditText;
-    Button createButton;
+    deadlineEditText, descriptionEditText;
+    Button createButton, chooseDeadlineButton;
     ImageButton genID;
     FirebaseFirestore firestore;
     @SuppressLint("MissingInflatedId")
@@ -49,12 +51,11 @@ public class Create_Project extends AppCompatActivity {
         idEditText = findViewById(R.id.ID_Project_EditText);
         nameEditText = findViewById(R.id.name_project_EditText);
         underTakeEditText = findViewById(R.id.underTake_project_EditText);
-        dayEditText = findViewById(R.id.day_EditText);
-        monthEditText = findViewById(R.id.month_EditText);
-        yearEditText = findViewById(R.id.year_EditText);
+        deadlineEditText = findViewById(R.id.deadline_EditText);
         descriptionEditText = findViewById(R.id.description_EditText);
         createButton = findViewById(R.id.Create_Project_Button);
         genID = findViewById(R.id.Generate_ID_PJ_Button);
+        chooseDeadlineButton = findViewById(R.id.chooseDeadline_Button);
 
         //todo: load Dam nhan
         firestore.collection("Employee").document(usernameEmp).get()
@@ -76,28 +77,51 @@ public class Create_Project extends AppCompatActivity {
             idEditText.setText(id);
         });
 
+        //todo: lay dealine
+        chooseDeadlineButton.setOnClickListener(v -> {
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+            int currentYear = currentDate.getYear();
+            int currentMonth = currentDate.getMonthValue() - 1;
+            int currentDay = currentDate.getDayOfMonth();
+
+            // Tạo DatePickerDialog
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, year, month, dayOfMonth) -> {
+                        // Định dạng ngày được chọn và đặt vào EditText
+                        @SuppressLint("DefaultLocale")
+                        String selectedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                        deadlineEditText.setText(selectedDate);
+                    },
+                    currentYear,
+                    currentMonth,
+                    currentDay
+            );
+
+            // Hiển thị DatePickerDialog
+            datePickerDialog.show();
+        });
+
+
         //todo: them du an
         createButton.setOnClickListener(v -> {
             String ID = idEditText.getText().toString();
             String name = nameEditText.getText().toString();
             String underTake = underTakeEditText.getText().toString();
-            String day = dayEditText.getText().toString();
-            String month = monthEditText.getText().toString();
-            String year = yearEditText.getText().toString();
+            String deadline = deadlineEditText.getText().toString();
             String description = descriptionEditText.getText().toString();
             //todo: kiem tra dieu kien
-            if(ID.isEmpty() || name.isEmpty() || day.isEmpty()
-                    || month.isEmpty() || year.isEmpty() || description.isEmpty())
+            if(ID.isEmpty() || name.isEmpty() || deadline.isEmpty() || description.isEmpty())
             {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(!isDate(day, month, year))
+            if(!isDate(deadline))
             {
                 Toast.makeText(this, "Ngày không hợp lệ", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String date = day + "/" + month + "/" + year;
             firestore.collection("Project").document(ID).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -105,7 +129,7 @@ public class Create_Project extends AppCompatActivity {
                                 idEditText.setError("ID đã tồn tại");
                             }
                             else {
-                                ProjectManage project = new ProjectManage(ID, name, underTake, description,date);
+                                ProjectManage project = new ProjectManage(ID, name, underTake, description,deadline);
                                 firestore.collection("Project").document(ID)
                                         .set(project)
                                         .addOnSuccessListener(aVoid ->{
@@ -115,9 +139,7 @@ public class Create_Project extends AppCompatActivity {
                                                                 .update("amount_pj", FieldValue.increment(1));
                                                 idEditText.setText("");
                                                 nameEditText.setText("");
-                                                dayEditText.setText("");
-                                                monthEditText.setText("");
-                                                yearEditText.setText("");
+                                                deadlineEditText.setText("");
                                                 descriptionEditText.setText("");
                                             }
                                         )
@@ -137,11 +159,10 @@ public class Create_Project extends AppCompatActivity {
         });
     }
 
-    boolean isDate(String d, String m, String y) {
+    boolean isDate(String deadline) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-            String inputDateStr = d + "/" + m + "/" + y ;
-            LocalDate inputDate = LocalDate.parse(inputDateStr, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate inputDate = LocalDate.parse(deadline, formatter);
             return inputDate.isAfter(LocalDate.now());
         }
         catch (DateTimeException e) {

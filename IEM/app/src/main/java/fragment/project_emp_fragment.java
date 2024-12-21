@@ -137,7 +137,7 @@ public class project_emp_fragment extends Fragment {
                         String name = document.getString("name");
                         String underTake = document.getString("underTake");
                         String deadline = document.getString("deadline");
-                        if(department.equals(underTake))
+                        if(department != null && department.equals(underTake))
                             projectManageList.add(new ProjectManage(id, name,underTake, description , deadline));
 
                     }
