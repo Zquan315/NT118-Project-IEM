@@ -28,7 +28,7 @@
 | Thăng chức/giáng chức nhân viên    |                                                                           |
 
 ## 4. Demo
-[![Xem video](https://img.youtube.com/vi/rT1AnZl2no8/hqdefault.jpg)](https://www.youtube.com/watch?v=rT1AnZl2no8)
+[Video demo](https://www.youtube.com/watch?v=rT1AnZl2no8)
 ## 5. Kết luận và hướng phát triển
 | **Kết luận**                                                                                                      | **Hướng phát triển**                                                      |
 |-------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
