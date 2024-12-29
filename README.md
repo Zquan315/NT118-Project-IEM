@@ -30,12 +30,12 @@
 ## 4. Demo
 [Video demo](https://www.youtube.com/watch?v=rT1AnZl2no8)
 ## 5. Kết luận và hướng phát triển
-| **Kết luận**                                                                                                      | **Hướng phát triển**                                                      |
-|-------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Nắm được các kiến thức cơ bản về hệ điều hành android | Đăng nhập, đăng xuất, quên mật khẩu, đổi mật khẩu         | Thêm chức năng thiết lập ảnh thẻ cho nhân viên                            |
-| Có thể viết được các chương trình cơ bản bằng Java để tạo nên các ứng dụng trên hệ điều hành android              | Thêm chức năng mã hóa mật khẩu như hàm băm, kĩ thuật DES hay AES          |
-| Hoàn thành đồ án môn học với gần như đầy đủ các chức năng cần thiết cho một ứng dụng quản lý                      | Mở rộng thêm phòng ban                                                    |
-|                                                                                                                   | Đổi ngôn ngữ                                                              |
-|                                                                                                                   | Thay đổi chủ đề giao diện                                                 |
+| **Kết luận**                                                                                         | **Hướng phát triển**                                                     |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| Nắm được các kiến thức cơ bản về hệ điều hành android                                                | Thêm chức năng thiết lập ảnh thẻ cho nhân viên                            |
+| Có thể viết được các chương trình cơ bản bằng Java để tạo nên các ứng dụng trên hệ điều hành android | Thêm chức năng mã hóa mật khẩu như hàm băm, kĩ thuật DES hay AES         |
+| Hoàn thành đồ án môn học với gần như đầy đủ các chức năng cần thiết cho một ứng dụng quản lý         | Mở rộng thêm phòng ban                                                   |
+|                                                                                                      | Đổi ngôn ngữ                                                             |
+|                                                                                                      | Thay đổi chủ đề giao diện                                                |
 ***
 > <span style="color:red;">**Copyright by To Cong Quan**</span> 
