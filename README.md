@@ -1,4 +1,4 @@
-# **NT118-Project**
+# **IT Enterprise Management Application**
 >_Lời ngỏ: Đây là lần đầu tiên nhóm chúng mình cùng hợp tác để thực hiện một đồ án. Nếu có gì sai sót trong quá trình thực hiện, kính mong quý thầy/cô và các bạn có thể bỏ qua. Xin chân thành cảm ơn._
 
 ## 1. Thành viên thực hiện
